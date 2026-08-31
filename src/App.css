@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-royal-blue: #1d4ed8; /* Tailwind blue-700 */
+  --color-safety-white: #ffffff; /* Tailwind orange-500 */
+  --color-third-grey:#626262;
+  /* Background Colors */
+  --color-bg-light: #f3f4f6; /* Light gray */
+  --color-text-dark: #1f2937; /* Dark Charcoal (gray-800) */
+  
+  /* Fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Montserrat", "Oswald", system-ui, sans-serif;
+  
+  /* Additional Configs */
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base custom classes (if any) */
+.page-padding { padding-top: 6rem; min-height: calc(100vh - 200px); }
