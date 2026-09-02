@@ -5,7 +5,7 @@ export default function Offers() {
   return (
     <section className="pt-32 pb-24 px-6 min-h-[calc(100vh-200px)] bg-slate-50 flex items-center justify-center">
       <div className="max-w-4xl w-full text-center">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Our Offers</h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">What we offer</h2>
         <p className="text-xl text-slate-600 mb-16">Exclusive deals for our local customers in Buffalo and Rochester</p>
         
         <div className="relative bg-gradient-to-br from-blue-700 to-slate-900 text-white p-12 md:p-16 rounded-3xl shadow-2xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">

@@ -1,11 +1,11 @@
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
 
 export default function Footer() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Offers', path: '/offers' },
+    { name: 'What we offer', path: '/offers' },
     { name: 'Contact', path: '/contact' },
   ];
 

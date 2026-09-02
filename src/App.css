@@ -6,7 +6,7 @@
   --color-safety-white: #ffffff; /* Tailwind orange-500 */
   --color-third-grey:#626262;
   /* Background Colors */
-  --color-bg-light: #f3f4f6; /* Light gray */
+  --color-bg-light: #f8fafc; /* Matches Tailwind slate-50 */
   --color-text-dark: #1f2937; /* Dark Charcoal (gray-800) */
   
   /* Fonts */
