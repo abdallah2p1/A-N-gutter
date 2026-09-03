@@ -1,6 +1,113 @@
+import { useState } from 'react';
 import { ArrowRight, Quote, ShieldCheck, Star, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import vanImage from '../assets/vanPhoto.png';
+
+const servicesData = [
+  {
+    title: "Residential Gutter Installation",
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
+    description: "Protect your home's foundation with our premium seamless gutters, custom-fitted for maximum water flow and long-lasting durability.",
+    backDescription: "Our residential seamless gutters are custom-measured and fabricated right at your home. This process ensures a perfect fit, eliminating ugly seams that are prone to leaks and rust. We use heavy-gauge aluminum and secure hidden hangers to guarantee your gutters withstand heavy snow, ice, and torrential rain, protecting your landscaping and foundation for years to come.",
+    linkTo: "/services"
+  },
+  {
+    title: "Gutter Repair & Maintenance",
+    image: "https://images.unsplash.com/photo-1581141849291-1125c7b692b5?q=80&w=800&auto=format&fit=crop",
+    description: "Expert repair services to fix leaks, realign sagging gutters, and restore your system to optimal working condition year-round.",
+    backDescription: "Don't let a minor leak become a major foundation problem. Our expert technicians can diagnose and repair common gutter issues including sagging sections, detached downspouts, corner leaks, and poor drainage. We offer comprehensive tune-ups to reinforce your existing system and extend its lifespan without the need for a full replacement.",
+    linkTo: "/services"
+  },
+  {
+    title: "LeafGuard Gutter Systems",
+    image: "https://images.unsplash.com/photo-1620317377041-862f99587428?q=80&w=800&auto=format&fit=crop",
+    description: "Never clean your gutters again. Our advanced guards prevent leaves and debris from clogging your system while handling heavy rainfall.",
+    backDescription: "Tired of climbing dangerous ladders every fall? Our state-of-the-art leaf protection systems keep leaves, pine needles, and debris out while allowing maximum water flow into the gutter. We offer several styles of guards tailored to your home's specific surroundings, ensuring a lifetime of clog-free performance.",
+    linkTo: "/services"
+  },
+  {
+    title: "Commercial Gutter Installation",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
+    description: "Heavy-duty commercial gutter systems designed to manage high volumes of water and protect your business property effectively.",
+    backDescription: "Commercial buildings require specialized water management solutions. We install oversized 6-inch and custom box gutters designed to handle the massive runoff from large commercial roofs. Our commercial-grade materials and reinforced installations minimize liability and protect your investment from costly water damage.",
+    linkTo: "/services"
+  },
+  {
+    title: "Custom Seamless Installation",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+    description: "Manufactured on-site to the exact specifications of your home, eliminating seams to drastically reduce the chance of leaks.",
+    backDescription: "Experience the ultimate in custom fabrication. We roll-form our seamless gutters on-site, perfectly matching the contours of your roofline. Available in over 30 colors, our custom installations not only provide superior water diversion but also enhance the curb appeal and architectural aesthetic of your property.",
+    linkTo: "/services"
+  },
+  {
+    title: "Jellyfish Permanent Exterior Lighting",
+    image: "https://images.unsplash.com/photo-1560067174-c5a3a8f37060?q=80&w=800&auto=format&fit=crop",
+    description: "Elevate your home's aesthetics with smart, permanent exterior lighting that provides beautiful curb appeal and enhanced security.",
+    backDescription: "Say goodbye to hanging holiday lights! We install premium, track-based permanent lighting systems that blend seamlessly into your fascia or gutters. Control millions of colors and dynamic patterns right from your smartphone. Perfect for holidays, game days, ambient architectural lighting, and added home security.",
+    linkTo: "/services"
+  }
+];
+
+function ServiceCard({ image, title, description, backDescription, linkTo }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div 
+      className="group relative flex flex-col bg-transparent [perspective:1000px] cursor-pointer h-full"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <div className={`relative w-full h-full rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-700 [transform-style:preserve-3d] border border-gray-100 ${isFlipped ? '[transform:rotateY(180deg)]' : 'hover:-translate-y-2'}`}>
+        
+        {/* Front */}
+        <div className="relative w-full h-full [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden">
+          <div className="w-full h-60 overflow-hidden relative shrink-0">
+            <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
+            <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+          </div>
+          
+          <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
+             <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
+          </div>
+
+          <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
+            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">{title}</h3>
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">{description}</p>
+            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
+              <span className="relative inline-flex items-center gap-2">
+                Show more
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Back */}
+        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-gradient-to-br from-royal-blue to-blue-900 text-white rounded-[2rem] p-8 shadow-2xl">
+          <h3 className="text-2xl font-bold mb-4 border-b border-white/20 pb-4">{title}</h3>
+          <p className="text-blue-50 flex-grow leading-relaxed text-sm">
+            {backDescription || description}
+          </p>
+          <div className="mt-auto pt-6 flex flex-col gap-3">
+             <Link 
+               to={linkTo} 
+               onClick={(e) => e.stopPropagation()} 
+               className="inline-flex items-center justify-center gap-2 w-full py-3 bg-safety-orange hover:bg-orange-600 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-orange-500/30"
+             >
+               Explore More <ArrowRight size={20} />
+             </Link>
+             <button 
+               onClick={(e) => { e.stopPropagation(); setIsFlipped(false); }}
+               className="text-white/70 hover:text-white text-sm font-semibold transition-colors mt-2"
+             >
+               Go Back
+             </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -88,156 +195,14 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            
-            {/* Service 1 */}
-            <Link to="/services" className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2">
-              <div className="w-full h-60 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" alt="Residential Gutter Installation" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-              
-              <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
-                <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">Residential Gutter Installation</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">Protect your home's foundation with our premium seamless gutters, custom-fitted for maximum water flow and long-lasting durability.</p>
-                
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
-                  <span className="relative inline-flex items-center gap-2">
-                    Explore Service
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Service 2 */}
-            <Link to="/services" className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2">
-              <div className="w-full h-60 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1581141849291-1125c7b692b5?q=80&w=800&auto=format&fit=crop" alt="Gutter Repair & Maintenance" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-              
-              <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
-                <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">Gutter Repair & Maintenance</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">Expert repair services to fix leaks, realign sagging gutters, and restore your system to optimal working condition year-round.</p>
-                
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
-                  <span className="relative inline-flex items-center gap-2">
-                    Explore Service
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Service 3 */}
-            <Link to="/services" className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2">
-              <div className="w-full h-60 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1620317377041-862f99587428?q=80&w=800&auto=format&fit=crop" alt="LeafGuard Gutter Systems" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-              
-              <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
-                <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">LeafGuard Gutter Systems</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">Never clean your gutters again. Our advanced guards prevent leaves and debris from clogging your system while handling heavy rainfall.</p>
-                
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
-                  <span className="relative inline-flex items-center gap-2">
-                    Explore Service
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Service 4 */}
-            <Link to="/services" className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2">
-              <div className="w-full h-60 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Commercial Gutter Installation" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-              
-              <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
-                <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">Commercial Gutter Installation</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">Heavy-duty commercial gutter systems designed to manage high volumes of water and protect your business property effectively.</p>
-                
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
-                  <span className="relative inline-flex items-center gap-2">
-                    Explore Service
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Service 5 */}
-            <Link to="/services" className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2">
-              <div className="w-full h-60 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Custom Seamless Gutter Installation" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-              
-              <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
-                <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">Custom Seamless Installation</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">Manufactured on-site to the exact specifications of your home, eliminating seams to drastically reduce the chance of leaks.</p>
-                
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
-                  <span className="relative inline-flex items-center gap-2">
-                    Explore Service
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Service 6 */}
-            <Link to="/services" className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2">
-              <div className="w-full h-60 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1560067174-c5a3a8f37060?q=80&w=800&auto=format&fit=crop" alt="Jellyfish Permanent Exterior Lighting" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-              
-              <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
-                <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">Jellyfish Permanent Exterior Lighting</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">Elevate your home's aesthetics with smart, permanent exterior lighting that provides beautiful curb appeal and enhanced security.</p>
-                
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
-                  <span className="relative inline-flex items-center gap-2">
-                    Explore Service
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-
+            {servicesData.map((service, index) => (
+              <ServiceCard key={index} {...service} />
+            ))}
           </div>
         </div>
 
         {/* Bottom Fluid Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-1 text-white">
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-1 text-slate-900">
           <svg className="relative block w-full h-[40px] lg:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="currentColor"></path>
           </svg>
@@ -245,60 +210,68 @@ export default function Home() {
       </section>
 
       {/* What We Offer Section */}
-      <section className="py-24 px-6 bg-white relative">
+      <section className="py-24 px-6 bg-slate-900 relative overflow-hidden">
+        {/* Ambient Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute -top-[30%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-600/20 blur-[120px]"></div>
+          <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-safety-orange/10 blur-[120px]"></div>
+        </div>
+
         <div className="max-w-7xl mx-auto z-10 relative mb-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-black text-slate-900 mb-4">What We Offer</h2>
-            <p className="text-xl text-slate-600">Unmatched quality, premium materials, and total peace of mind for every homeowner.</p>
+            <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-4">What We Offer</h2>
+            <p className="text-xl text-blue-100/80">Unmatched quality, premium materials, and total peace of mind for every homeowner.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Quality 1 */}
-            <Link to="/offers" className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col relative overflow-hidden group hover:-translate-y-2">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-[2.5] duration-700 ease-out"></div>
-              <div className="relative z-10 flex-grow">
-                <div className="w-14 h-14 bg-white text-royal-blue rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-gray-100 group-hover:bg-blue-50 transition-colors">
-                  <ShieldCheck size={28} />
+            <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 overflow-hidden hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-royal-blue rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:scale-110 transition-transform duration-500">
+                  <ShieldCheck size={32} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors">5-Year Warranty</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">We stand fully behind our work. Every installation comes with a comprehensive 5-year workmanship warranty to guarantee your peace of mind.</p>
+                <h3 className="text-2xl font-bold text-white mb-4">5-Year Warranty</h3>
+                <p className="text-gray-300 leading-relaxed mb-8">We stand fully behind our work. Every installation comes with a comprehensive 5-year workmanship warranty to guarantee your peace of mind.</p>
+                <Link to="/offers" className="inline-flex items-center gap-2 text-blue-400 font-semibold group-hover:text-blue-300 transition-colors">
+                  View Details <ArrowRight size={18} className="transform group-hover:translate-x-2 transition-transform" />
+                </Link>
               </div>
-              <div className="relative z-10 text-royal-blue font-bold flex items-center gap-2 group-hover:text-safety-orange transition-colors w-fit mt-auto pt-4">
-                View Details <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
+            </div>
 
-            {/* Quality 2 */}
-            <Link to="/offers" className="bg-gradient-to-br from-royal-blue to-blue-900 text-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-800 flex flex-col relative overflow-hidden group transform md:-translate-y-4 hover:-translate-y-8">
-              <div className="absolute top-0 right-0 px-4 py-1.5 bg-safety-orange text-white text-xs font-black uppercase tracking-wider rounded-bl-2xl z-20 shadow-md">Top Quality</div>
-              <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full -ml-20 -mb-20 transition-transform group-hover:scale-[2.5] duration-700 ease-out"></div>
-              <div className="relative z-10 flex-grow pt-2">
-                <div className="w-14 h-14 bg-white/10 backdrop-blur-md text-white rounded-2xl flex items-center justify-center mb-6 shadow-inner border border-white/20 group-hover:bg-white/20 transition-colors">
-                  <Star size={28} />
+            {/* Quality 2 - Highlighted */}
+            <div className="group relative bg-gradient-to-b from-royal-blue to-blue-900 border border-blue-400/30 rounded-3xl p-8 transition-all duration-500 overflow-hidden hover:-translate-y-4 shadow-[0_0_40px_rgba(37,99,235,0.2)] md:-translate-y-4">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-safety-orange via-yellow-400 to-safety-orange"></div>
+              <div className="absolute -right-20 -top-20 w-64 h-64 bg-safety-orange/20 rounded-full blur-[80px] group-hover:bg-safety-orange/30 transition-colors duration-500"></div>
+              <div className="relative z-10">
+                <div className="absolute top-0 right-0 px-4 py-1.5 bg-safety-orange/20 text-safety-orange text-xs font-black uppercase tracking-wider rounded-full border border-safety-orange/30 backdrop-blur-md">Top Quality</div>
+                
+                <div className="w-16 h-16 bg-gradient-to-br from-safety-orange to-orange-600 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(249,115,22,0.3)] group-hover:scale-110 transition-transform duration-500 mt-2">
+                  <Star size={32} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-100 transition-colors">Premium Materials</h3>
-                <p className="text-blue-100 mb-6 leading-relaxed">We never cut corners. By using only heavy-gauge aluminum and high-strength hidden hangers, we ensure your gutters survive the harshest New York winters.</p>
+                <h3 className="text-2xl font-bold text-white mb-4">Premium Materials</h3>
+                <p className="text-blue-100/90 leading-relaxed mb-8">We never cut corners. By using only heavy-gauge aluminum and high-strength hidden hangers, we ensure your gutters survive the harshest winters.</p>
+                <Link to="/offers" className="inline-flex items-center gap-2 text-safety-orange font-semibold group-hover:text-orange-400 transition-colors">
+                  View Details <ArrowRight size={18} className="transform group-hover:translate-x-2 transition-transform" />
+                </Link>
               </div>
-              <div className="relative z-10 text-white font-bold flex items-center gap-2 group-hover:text-safety-orange transition-colors w-fit mt-auto pt-4">
-                View Details <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
+            </div>
 
             {/* Quality 3 */}
-            <Link to="/offers" className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col relative overflow-hidden group hover:-translate-y-2">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-[2.5] duration-700 ease-out"></div>
-              <div className="relative z-10 flex-grow">
-                <div className="w-14 h-14 bg-white text-safety-orange rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-gray-100 group-hover:bg-orange-50 transition-colors">
-                  <Wrench size={28} />
+            <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 overflow-hidden hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-safety-orange rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(249,115,22,0.3)] group-hover:scale-110 transition-transform duration-500">
+                  <Wrench size={32} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors">Expert Craftsmanship</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">Our installers are highly trained professionals who custom-fabricate your seamless gutters on-site for a perfect, leak-free fit to your home.</p>
+                <h3 className="text-2xl font-bold text-white mb-4">Expert Craftsmanship</h3>
+                <p className="text-gray-300 leading-relaxed mb-8">Our installers are highly trained professionals who custom-fabricate your seamless gutters on-site for a perfect, leak-free fit to your home.</p>
+                <Link to="/offers" className="inline-flex items-center gap-2 text-orange-400 font-semibold group-hover:text-orange-300 transition-colors">
+                  View Details <ArrowRight size={18} className="transform group-hover:translate-x-2 transition-transform" />
+                </Link>
               </div>
-              <div className="relative z-10 text-royal-blue font-bold flex items-center gap-2 group-hover:text-safety-orange transition-colors w-fit mt-auto pt-4">
-                View Details <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
+            </div>
 
           </div>
         </div>
