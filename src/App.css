@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+section,
+[id] {
+  scroll-margin-top: 90px;
+}
+
 @theme {
   /* Colors */
   --color-royal-blue: #1d4ed8; /* Tailwind blue-700 */
