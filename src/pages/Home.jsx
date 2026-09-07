@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Quote, ShieldCheck, Star, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import vanImage from '../assets/vanPhoto.png';
+import vanImage from '../assets/vannotstairs.jpg';
+import hero1 from '../assets/hero1.jpg';
+import hero2 from '../assets/hero2.jpg';
+import hero3 from '../assets/hero3.jpg';
+import hero4 from '../assets/hero4.jpg';
+
+const heroImages = [vanImage, hero1, hero2, hero3, hero4];
 
 const servicesData = [
   {
@@ -110,14 +116,31 @@ function ServiceCard({ image, title, description, backDescription, linkTo }) {
 }
 
 export default function Home() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-bg-light font-sans text-text-dark">
       {/* Hero Section */}
-      {/* Hero Section */}
       <section 
-        className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 overflow-hidden min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${vanImage})` }}
+        className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 overflow-hidden min-h-screen flex items-center justify-center"
       >
+        {heroImages.map((img, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ backgroundImage: `url(${img})` }}
+          />
+        ))}
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-slate-900/75 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
@@ -126,7 +149,7 @@ export default function Home() {
           
           <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-semibold text-sm mb-8 shadow-xl">
             <Star size={16} className="fill-blue-400 text-blue-400" />
-            <span className="tracking-wide">Top-Rated Gutter Experts in NY</span>
+            <span className="tracking-wide">Top-Rated Gutter Experts in Western NY</span>
           </div>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black leading-tight mb-8 text-white tracking-tight drop-shadow-2xl cursor-default">
@@ -176,7 +199,7 @@ export default function Home() {
       <section className="bg-slate-50 py-10 lg:py-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 text-center">
-            <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">5-Year Warranty</div>
+            <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Warranty</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Free, Onsite Estimates</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">5 Star Service</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Licensed & Insured</div>
@@ -214,7 +237,7 @@ export default function Home() {
         {/* Ambient Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute -top-[30%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-600/20 blur-[120px]"></div>
-          <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-safety-orange/10 blur-[120px]"></div>
+          <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-blue-400/10 blur-[120px]"></div>
         </div>
 
         <div className="max-w-7xl mx-auto z-10 relative mb-10">
@@ -226,49 +249,48 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Quality 1 */}
-            <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 overflow-hidden hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-royal-blue rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:scale-110 transition-transform duration-500">
+            <div className="group relative h-full rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col hover:bg-white/10 hover:border-blue-400/50 shadow-lg hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              <div className="relative z-10 flex flex-col flex-grow">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-royal-blue rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <ShieldCheck size={32} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">5-Year Warranty</h3>
-                <p className="text-gray-300 leading-relaxed mb-8">We stand fully behind our work. Every installation comes with a comprehensive 5-year workmanship warranty to guarantee your peace of mind.</p>
-                <Link to="/offers" className="inline-flex items-center gap-2 text-blue-400 font-semibold group-hover:text-blue-300 transition-colors">
-                  View Details <ArrowRight size={18} className="transform group-hover:translate-x-2 transition-transform" />
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors">Warranty</h3>
+                <p className="text-gray-300 leading-relaxed mb-8 flex-grow group-hover:text-white transition-colors">We stand fully behind our work. Every installation comes with a comprehensive warranty to guarantee your peace of mind.</p>
+                <Link to="/offers" className="group/link inline-flex items-center gap-2 text-blue-400 font-bold hover:text-blue-300 transition-colors mt-auto w-fit">
+                  View Details <ArrowRight size={18} className="transform group-hover/link:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
 
             {/* Quality 2 - Highlighted */}
-            <div className="group relative bg-gradient-to-b from-royal-blue to-blue-900 border border-blue-400/30 rounded-3xl p-8 transition-all duration-500 overflow-hidden hover:-translate-y-4 shadow-[0_0_40px_rgba(37,99,235,0.2)] md:-translate-y-4">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-safety-orange via-yellow-400 to-safety-orange"></div>
-              <div className="absolute -right-20 -top-20 w-64 h-64 bg-safety-orange/20 rounded-full blur-[80px] group-hover:bg-safety-orange/30 transition-colors duration-500"></div>
-              <div className="relative z-10">
-                <div className="absolute top-0 right-0 px-4 py-1.5 bg-safety-orange/20 text-safety-orange text-xs font-black uppercase tracking-wider rounded-full border border-safety-orange/30 backdrop-blur-md">Top Quality</div>
+            <div className="group relative h-full rounded-3xl bg-gradient-to-b from-royal-blue/90 to-blue-900/90 border border-blue-400/50 p-8 flex flex-col hover:border-blue-300/70 shadow-xl hover:shadow-[0_12px_40px_rgba(255,255,255,0.25)] transition-all duration-500 md:-translate-y-4 hover:-translate-y-2 md:hover:-translate-y-6 overflow-hidden transform-gpu">
+              <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-400/20 rounded-full blur-[80px] group-hover:bg-blue-400/40 transition-colors duration-700"></div>
+              <div className="relative z-10 flex flex-col flex-grow">
+                <div className="absolute top-0 right-0 px-4 py-1.5 bg-blue-400/20 text-blue-300 text-xs font-black uppercase tracking-wider rounded-full border border-blue-400/30 shadow-lg group-hover:bg-blue-400 group-hover:text-white transition-colors duration-300">Top Quality</div>
                 
-                <div className="w-16 h-16 bg-gradient-to-br from-safety-orange to-orange-600 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(249,115,22,0.3)] group-hover:scale-110 transition-transform duration-500 mt-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(96,165,250,0.3)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 mt-2">
                   <Star size={32} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Premium Materials</h3>
-                <p className="text-blue-100/90 leading-relaxed mb-8">We never cut corners. By using only heavy-gauge aluminum and high-strength hidden hangers, we ensure your gutters survive the harshest winters.</p>
-                <Link to="/offers" className="inline-flex items-center gap-2 text-safety-orange font-semibold group-hover:text-orange-400 transition-colors">
-                  View Details <ArrowRight size={18} className="transform group-hover:translate-x-2 transition-transform" />
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-100 transition-colors">Premium Materials</h3>
+                <p className="text-blue-50/90 leading-relaxed mb-8 flex-grow group-hover:text-white transition-colors">We never cut corners. By using only heavy-gauge aluminum and high-strength hidden hangers, we ensure your gutters survive the harshest winters.</p>
+                <Link to="/offers" className="group/link inline-flex items-center gap-2 text-blue-300 font-bold hover:text-blue-200 transition-colors mt-auto w-fit">
+                  View Details <ArrowRight size={18} className="transform group-hover/link:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
 
             {/* Quality 3 */}
-            <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 overflow-hidden hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-safety-orange rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(249,115,22,0.3)] group-hover:scale-110 transition-transform duration-500">
+            <div className="group relative h-full rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col hover:bg-white/10 hover:border-blue-400/50 shadow-lg hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              <div className="relative z-10 flex flex-col flex-grow">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(37,99,235,0.3)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
                   <Wrench size={32} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Expert Craftsmanship</h3>
-                <p className="text-gray-300 leading-relaxed mb-8">Our installers are highly trained professionals who custom-fabricate your seamless gutters on-site for a perfect, leak-free fit to your home.</p>
-                <Link to="/offers" className="inline-flex items-center gap-2 text-orange-400 font-semibold group-hover:text-orange-300 transition-colors">
-                  View Details <ArrowRight size={18} className="transform group-hover:translate-x-2 transition-transform" />
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors">Expert Craftsmanship</h3>
+                <p className="text-gray-300 leading-relaxed mb-8 flex-grow group-hover:text-white transition-colors">Our installers are highly trained professionals who custom-fabricate your seamless gutters on-site for a perfect, leak-free fit to your home.</p>
+                <Link to="/offers" className="group/link inline-flex items-center gap-2 text-blue-400 font-bold hover:text-blue-300 transition-colors mt-auto w-fit">
+                  View Details <ArrowRight size={18} className="transform group-hover/link:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
@@ -305,9 +327,10 @@ export default function Home() {
             
             <Link 
               to="/contact" 
-              className="inline-flex items-center gap-2 px-8 py-4 bg-safety-orange hover:bg-orange-600 text-white rounded-full font-bold text-lg transition-all shadow-lg"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-blue-900 hover:bg-blue-600 text-white rounded-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-blue-400/40 hover:-translate-y-1"
             >
               Request Your Free Estimate
+              <ArrowRight size={22} className="transform transition-transform duration-300 group-hover:translate-x-1.5" />
             </Link>
           </div>
 
