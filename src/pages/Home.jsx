@@ -1,58 +1,15 @@
-import { useState, useEffect } from 'react';
 import { ArrowRight, Quote, ShieldCheck, Star, Wrench } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import vanImage from '../assets/vannotstairs.jpg';
 import hero1 from '../assets/hero1.jpg';
 import hero2 from '../assets/hero2.jpg';
 import hero3 from '../assets/hero3.jpg';
 import hero4 from '../assets/hero4.jpg';
+import vanImage from '../assets/vannotstairs.jpg';
 
 const heroImages = [vanImage, hero1, hero2, hero3, hero4];
 
-const servicesData = [
-  {
-    title: "Residential Gutter Installation",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
-    description: "Protect your home's foundation with our premium seamless gutters, custom-fitted for maximum water flow and long-lasting durability.",
-    backDescription: "Our residential seamless gutters are custom-measured and fabricated right at your home. This process ensures a perfect fit, eliminating ugly seams that are prone to leaks and rust. We use heavy-gauge aluminum and secure hidden hangers to guarantee your gutters withstand heavy snow, ice, and torrential rain, protecting your landscaping and foundation for years to come.",
-    linkTo: "/services"
-  },
-  {
-    title: "Gutter Repair & Maintenance",
-    image: "https://images.unsplash.com/photo-1581141849291-1125c7b692b5?q=80&w=800&auto=format&fit=crop",
-    description: "Expert repair services to fix leaks, realign sagging gutters, and restore your system to optimal working condition year-round.",
-    backDescription: "Don't let a minor leak become a major foundation problem. Our expert technicians can diagnose and repair common gutter issues including sagging sections, detached downspouts, corner leaks, and poor drainage. We offer comprehensive tune-ups to reinforce your existing system and extend its lifespan without the need for a full replacement.",
-    linkTo: "/services"
-  },
-  {
-    title: "LeafGuard Gutter Systems",
-    image: "https://images.unsplash.com/photo-1620317377041-862f99587428?q=80&w=800&auto=format&fit=crop",
-    description: "Never clean your gutters again. Our advanced guards prevent leaves and debris from clogging your system while handling heavy rainfall.",
-    backDescription: "Tired of climbing dangerous ladders every fall? Our state-of-the-art leaf protection systems keep leaves, pine needles, and debris out while allowing maximum water flow into the gutter. We offer several styles of guards tailored to your home's specific surroundings, ensuring a lifetime of clog-free performance.",
-    linkTo: "/services"
-  },
-  {
-    title: "Commercial Gutter Installation",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
-    description: "Heavy-duty commercial gutter systems designed to manage high volumes of water and protect your business property effectively.",
-    backDescription: "Commercial buildings require specialized water management solutions. We install oversized 6-inch and custom box gutters designed to handle the massive runoff from large commercial roofs. Our commercial-grade materials and reinforced installations minimize liability and protect your investment from costly water damage.",
-    linkTo: "/services"
-  },
-  {
-    title: "Custom Seamless Installation",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-    description: "Manufactured on-site to the exact specifications of your home, eliminating seams to drastically reduce the chance of leaks.",
-    backDescription: "Experience the ultimate in custom fabrication. We roll-form our seamless gutters on-site, perfectly matching the contours of your roofline. Available in over 30 colors, our custom installations not only provide superior water diversion but also enhance the curb appeal and architectural aesthetic of your property.",
-    linkTo: "/services"
-  },
-  {
-    title: "Jellyfish Permanent Exterior Lighting",
-    image: "https://images.unsplash.com/photo-1560067174-c5a3a8f37060?q=80&w=800&auto=format&fit=crop",
-    description: "Elevate your home's aesthetics with smart, permanent exterior lighting that provides beautiful curb appeal and enhanced security.",
-    backDescription: "Say goodbye to hanging holiday lights! We install premium, track-based permanent lighting systems that blend seamlessly into your fascia or gutters. Control millions of colors and dynamic patterns right from your smartphone. Perfect for holidays, game days, ambient architectural lighting, and added home security.",
-    linkTo: "/services"
-  }
-];
+import { services } from '../data/services';
 
 function ServiceCard({ image, title, description, backDescription, linkTo }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -97,7 +54,7 @@ function ServiceCard({ image, title, description, backDescription, linkTo }) {
              <Link 
                to={linkTo} 
                onClick={(e) => e.stopPropagation()} 
-               className="inline-flex items-center justify-center gap-2 w-full py-3 bg-safety-orange hover:bg-orange-600 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-orange-500/30"
+               className="inline-flex items-center justify-center gap-2 w-full py-3 bg-safety-orange hover:bg-blue-900 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-blue-900/30"
              >
                Explore More <ArrowRight size={20} />
              </Link>
@@ -218,8 +175,15 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {servicesData.map((service, index) => (
-              <ServiceCard key={index} {...service} />
+            {services.map((service, index) => (
+              <ServiceCard 
+                key={index} 
+                image={service.image}
+                title={service.title}
+                description={service.shortDescription}
+                backDescription={service.fullDescription}
+                linkTo="/services"
+              />
             ))}
           </div>
         </div>
