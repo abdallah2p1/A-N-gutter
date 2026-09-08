@@ -1,10 +1,12 @@
-import { Menu, Phone, X } from 'lucide-react';
+import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logoImg from '../assets/Untitled design.png';
+import { services } from '../data/services';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [servicesExpanded, setServicesExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -14,10 +16,8 @@ export default function Header() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Change background style when scrolled past top
       setScrolled(currentScrollY > 20);
       
-      // Hide on scroll down (past 100px), show on scroll up
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
       } else {
@@ -31,29 +31,22 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setServicesExpanded(false);
   }, [location]);
 
-  // Scroll to top when a link is clicked
   const handleLinkClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsMobileMenuOpen(false);
+    setServicesExpanded(false);
   };
-
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'What we offer', path: '/offers' },
-    { name: 'Contact', path: '/contact' },
-  ];
 
   return (
     <div className={`fixed top-0 left-0 right-0 z-50 px-4 mt-4 pointer-events-none transition-transform duration-500 ease-in-out ${
       isVisible ? 'translate-y-0' : '-translate-y-[150%]'
     }`}>
-      <header className={`pointer-events-auto max-w-7xl mx-auto rounded-sm transition-all duration-300 ${
+      <header className={`pointer-events-auto max-w-7xl mx-auto rounded-xl transition-all duration-300 ${
         scrolled ? 'bg-white shadow-lg shadow-gray-200/50 py-3' : 'bg-white/95 backdrop-blur-md py-4 border border-gray-100 shadow-sm'
       }`}>
         <div className="px-6 md:px-8 flex justify-between items-center">
@@ -69,22 +62,66 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4">
             <ul className="flex items-center gap-2">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.path}
-                    onClick={handleLinkClick}
-                    className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link 
+                  to="/"
+                  onClick={handleLinkClick}
+                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
+                >
+                  Home
+                </Link>
+              </li>
+
+              {/* Services Dropdown */}
+              <li className="relative group">
+                <Link 
+                  to="/services"
+                  className="flex items-center gap-1 text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all cursor-pointer"
+                >
+                  Services
+                  <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                </Link>
+                
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                  <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden flex flex-col p-2">
+                    {services.map(service => (
+                      <Link 
+                        key={service.slug}
+                        to={`/services?service=${service.slug}`}
+                        onClick={handleLinkClick}
+                        className="px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-royal-blue text-sm font-semibold rounded-xl transition-colors"
+                      >
+                        {service.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <Link 
+                  to="/offers"
+                  onClick={handleLinkClick}
+                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
+                >
+                  What we offer
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/contact"
+                  onClick={handleLinkClick}
+                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
             
             <a
               href="tel:5555555555"
-              className="ml-2 flex items-center gap-2 px-6 py-2.5 bg-royal-blue hover:bg-third-grey text-safety-white rounded-xl font-bold transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg shadow-blue-500/20"
+              className="ml-2 flex items-center gap-2 px-6 py-2.5 bg-royal-blue hover:bg-blue-700 text-white rounded-xl font-bold transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg shadow-blue-500/20"
             >
               <Phone size={18} />
               Call Now
@@ -105,21 +142,63 @@ export default function Header() {
         {isMobileMenuOpen && (
           <nav className="md:hidden absolute top-full left-0 right-0 mt-3 mx-4 bg-white shadow-xl rounded-3xl border border-gray-100 py-4 px-6 flex flex-col gap-2 pointer-events-auto">
             <ul className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.path} 
-                    onClick={handleLinkClick}
-                    className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link 
+                  to="/" 
+                  onClick={handleLinkClick}
+                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              
+              {/* Mobile Services Dropdown */}
+              <li className="flex flex-col">
+                <div 
+                  className="flex items-center justify-between px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors cursor-pointer"
+                  onClick={() => setServicesExpanded(!servicesExpanded)}
+                >
+                  <Link to="/services" onClick={(e) => { e.stopPropagation(); handleLinkClick(); }}>Services</Link>
+                  <button className="p-1"><ChevronDown size={20} className={`transition-transform ${servicesExpanded ? 'rotate-180' : ''}`} /></button>
+                </div>
+                {servicesExpanded && (
+                  <div className="flex flex-col gap-1 pl-6 mt-1 border-l-2 border-gray-100 ml-4 mb-2">
+                    {services.map(service => (
+                      <Link 
+                        key={service.slug}
+                        to={`/services?service=${service.slug}`}
+                        onClick={handleLinkClick}
+                        className="block px-4 py-2 text-base font-medium text-gray-600 hover:text-royal-blue"
+                      >
+                        {service.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              <li>
+                <Link 
+                  to="/offers" 
+                  onClick={handleLinkClick}
+                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
+                >
+                  What we offer
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/contact" 
+                  onClick={handleLinkClick}
+                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
             <a 
               href="tel:5555555555" 
-              className="flex items-center justify-center gap-2 w-full mt-2 px-6 py-3 bg-royal-blue hover:bg-third-grey text-safety-white rounded-xl font-bold text-lg shadow-md transition-colors"
+              className="flex items-center justify-center gap-2 w-full mt-4 px-6 py-3 bg-royal-blue hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-md transition-colors"
             >
               <Phone size={20} />
               Call Now
