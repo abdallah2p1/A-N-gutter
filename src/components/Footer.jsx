@@ -126,7 +126,7 @@ export default function Footer() {
               </button>
               {servicesOpen && (
                 <ul className="ml-5 mt-3 flex flex-col gap-2 border-l border-blue-400/30 pl-4">
-                  {quoteServiceOptions.map((service) => (
+                  {quoteServiceOptions.filter(service => service !== 'Other').map((service) => (
                       <li key={service}>
                       <Link to="/services" className="text-sm text-gray-400 transition-colors hover:text-blue-700">
                           {service}
