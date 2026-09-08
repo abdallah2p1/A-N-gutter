@@ -1,6 +1,7 @@
 import { ArrowRight, Quote, ShieldCheck, Star, Wrench } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ScrollReveal from '../components/ScrollReveal';
 import hero1 from '../assets/hero1.jpg';
 import hero2 from '../assets/hero2.jpg';
 import hero3 from '../assets/hero3.jpg';
@@ -28,32 +29,32 @@ function ServiceCard({ image, title, description, backDescription, linkTo }) {
             <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
           </div>
           
-          <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-gray-50">
+          <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-blue-400 shadow-xl flex items-center justify-center text-white group-hover:bg-blue-700 group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-transparent">
              <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
           </div>
 
           <div className="p-8 pt-10 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/50">
-            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-royal-blue transition-colors pr-4">{title}</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors pr-4">{title}</h3>
             <p className="text-gray-500 text-sm leading-relaxed mb-6">{description}</p>
-            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-royal-blue font-semibold text-sm">
+            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-blue-400 group-hover:text-blue-700 transition-colors font-semibold text-sm">
               <span className="relative inline-flex items-center gap-2">
                 Show more
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-royal-blue transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-700 transition-all duration-300 group-hover:w-full"></span>
               </span>
             </div>
           </div>
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-gradient-to-br from-royal-blue to-blue-900 text-white rounded-[2rem] p-8 shadow-2xl">
+        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-gradient-to-br from-blue-400 to-blue-900 text-white rounded-[2rem] p-8 shadow-2xl">
           <h3 className="text-2xl font-bold mb-4 border-b border-white/20 pb-4">{title}</h3>
           <p className="text-blue-50 flex-grow leading-relaxed text-sm">
             {backDescription || description}
           </p>
           <div className="mt-auto pt-6 flex flex-col gap-3">
-             <Link 
-               to={linkTo} 
-               onClick={(e) => e.stopPropagation()} 
+             <Link
+               to={linkTo}
+               onClick={(e) => e.stopPropagation()}
                className="inline-flex items-center justify-center gap-2 w-full py-3 bg-safety-orange hover:bg-blue-900 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-blue-900/30"
              >
                Explore More <ArrowRight size={20} />
@@ -93,7 +94,7 @@ export default function Home() {
           <div
             key={index}
             className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              index === currentImageIndex ? 'opacity-100 animate-ken-burns' : 'opacity-0'
             }`}
             style={{ backgroundImage: `url(${img})` }}
           />
@@ -130,7 +131,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
             <Link 
               to="/contact" 
-              className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-400 hover:bg-blue-600 text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-2xl shadow-blue-500/40"
+              className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-400 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-2xl shadow-blue-500/40"
             >
               Get a Quote <ArrowRight size={22} className="transition-transform group-hover:translate-x-1.5" />
             </Link>
@@ -154,19 +155,19 @@ export default function Home() {
 
       {/* Trust Banner Section */}
       <section className="bg-slate-50 py-10 lg:py-12 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
+        <ScrollReveal className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 text-center">
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Warranty</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Free, Onsite Estimates</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">5 Star Service</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Licensed & Insured</div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Services Section */}
       <section className="py-24 px-6 bg-bg-light relative">
-        <div className="max-w-7xl mx-auto">
+        <ScrollReveal className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-black text-blue-400 mb-4">Our Services</h2>
             <p className="text-xl text-gray-600">
@@ -176,17 +177,18 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {services.map((service, index) => (
-              <ServiceCard 
-                key={index} 
-                image={service.image}
-                title={service.title}
-                description={service.shortDescription}
-                backDescription={service.fullDescription}
-                linkTo="/services"
-              />
+              <ScrollReveal key={index} delay={index * 0.1}>
+                <ServiceCard 
+                  image={service.image}
+                  title={service.title}
+                  description={service.shortDescription}
+                  backDescription={service.fullDescription}
+                  linkTo="/services"
+                />
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Bottom Fluid Wave Divider */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-1 text-slate-900">
@@ -204,7 +206,7 @@ export default function Home() {
           <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-blue-400/10 blur-[120px]"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto z-10 relative mb-10">
+        <ScrollReveal className="max-w-7xl mx-auto z-10 relative mb-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-4">Why Choose Us</h2>
             <p className="text-xl text-blue-100/80">Unmatched quality, premium materials, and total peace of mind for every homeowner.</p>
@@ -213,10 +215,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Quality 1 */}
-            <div className="group relative h-full rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col hover:bg-white/10 hover:border-blue-400/50 shadow-lg hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu">
+            <ScrollReveal delay={0.1} className="group relative h-full rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col hover:bg-white/10 hover:border-blue-700/50 shadow-lg hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
               <div className="relative z-10 flex flex-col flex-grow">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-royal-blue rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-400 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <ShieldCheck size={32} className="text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors">Warranty</h3>
@@ -225,13 +227,13 @@ export default function Home() {
                   View Details <ArrowRight size={18} className="transform group-hover/link:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Quality 2 - Highlighted */}
-            <div className="group relative h-full rounded-3xl bg-gradient-to-b from-royal-blue/90 to-blue-900/90 border border-blue-400/50 p-8 flex flex-col hover:border-blue-300/70 shadow-xl hover:shadow-[0_12px_40px_rgba(255,255,255,0.25)] transition-all duration-500 md:-translate-y-4 hover:-translate-y-2 md:hover:-translate-y-6 overflow-hidden transform-gpu">
-              <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-400/20 rounded-full blur-[80px] group-hover:bg-blue-400/40 transition-colors duration-700"></div>
+            <ScrollReveal delay={0.2} className="group relative h-full rounded-3xl bg-gradient-to-b from-blue-400/90 to-blue-900/90 border border-blue-400/50 p-8 flex flex-col hover:border-blue-300/70 shadow-xl hover:shadow-[0_12px_40px_rgba(255,255,255,0.25)] transition-all duration-500 md:-translate-y-4 hover:-translate-y-2 md:hover:-translate-y-6 overflow-hidden transform-gpu">
+              <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-400/20 rounded-full blur-[80px] group-hover:bg-blue-700/40 transition-colors duration-700"></div>
               <div className="relative z-10 flex flex-col flex-grow">
-                <div className="absolute top-0 right-0 px-4 py-1.5 bg-blue-400/20 text-blue-300 text-xs font-black uppercase tracking-wider rounded-full border border-blue-400/30 shadow-lg group-hover:bg-blue-400 group-hover:text-white transition-colors duration-300">Top Quality</div>
+                <div className="absolute top-0 right-0 px-4 py-1.5 bg-blue-400/20 text-blue-300 text-xs font-black uppercase tracking-wider rounded-full border border-blue-400/30 shadow-lg group-hover:bg-blue-700 group-hover:text-white transition-colors duration-300">Top Quality</div>
                 
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(96,165,250,0.3)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 mt-2">
                   <Star size={32} className="text-white" />
@@ -242,10 +244,10 @@ export default function Home() {
                   View Details <ArrowRight size={18} className="transform group-hover/link:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Quality 3 */}
-            <div className="group relative h-full rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col hover:bg-white/10 hover:border-blue-400/50 shadow-lg hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu">
+            <ScrollReveal delay={0.3} className="group relative h-full rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col hover:bg-white/10 hover:border-blue-700/50 shadow-lg hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
               <div className="relative z-10 flex flex-col flex-grow">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(37,99,235,0.3)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
@@ -257,13 +259,13 @@ export default function Home() {
                   View Details <ArrowRight size={18} className="transform group-hover/link:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
-            </div>
+            </ScrollReveal>
 
           </div>
-        </div>
+        </ScrollReveal>
         
-        {/* Bottom Fluid Wave Divider to transition to Trust Banner (bg-royal-blue) */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-1 text-royal-blue">
+        {/* Bottom Fluid Wave Divider to transition to Trust Banner (bg-blue-400) */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-1 text-blue-400">
           <svg className="relative block w-full h-[40px] lg:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="currentColor"></path>
           </svg>
@@ -271,8 +273,8 @@ export default function Home() {
       </section>
 
       {/* Trust / Social Proof Banner */}
-      <section className="bg-royal-blue py-20 px-6 text-white relative">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16">
+      <section className="bg-blue-400 py-20 px-6 text-white relative">
+        <ScrollReveal className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16">
           
           <div className="lg:w-1/2">
             <h2 className="text-4xl md:text-5xl font-display font-black mb-8">
@@ -291,7 +293,7 @@ export default function Home() {
             
             <Link 
               to="/contact" 
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-blue-900 hover:bg-blue-600 text-white rounded-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-blue-400/40 hover:-translate-y-1"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-blue-700 text-blue-400 hover:text-white rounded-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-blue-700/40 hover:-translate-y-1"
             >
               Request Your Free Estimate
               <ArrowRight size={22} className="transform transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -299,7 +301,7 @@ export default function Home() {
           </div>
 
           <div className="lg:w-1/2">
-            <div className="bg-white text-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative">
+            <ScrollReveal delay={0.2} direction="left" className="bg-white text-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative">
               <Quote className="absolute top-6 left-6 text-blue-100" size={64} strokeWidth={1} />
               <div className="relative z-10">
                 <div className="flex items-center gap-1 text-safety-orange mb-4">
@@ -322,10 +324,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
     </div>
   );
 }
+

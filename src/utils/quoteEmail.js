@@ -18,7 +18,9 @@ export const validateQuoteFields = (fields) => {
     errors.from_email = 'Please enter a valid email address.';
   }
   if (!fields.address.trim()) errors.address = 'Please enter your address.';
-  if (!fields.service) errors.service = 'Please select a service.';
+  if (!fields.service || (Array.isArray(fields.service) && fields.service.length === 0)) {
+    errors.service = 'Please select a service.';
+  }
   if (!fields.contact_method) errors.contact_method = 'Please choose a contact method.';
 
   return errors;

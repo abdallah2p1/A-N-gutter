@@ -31,7 +31,7 @@ function ServiceBlock({ image, alt, title, description, slug, index, onOpenModal
     <article
       ref={blockRef}
       style={{ transitionDelay: `${index * 100}ms` }}
-      className={`group mb-8 flex w-full flex-col rounded-[2rem] border border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-all duration-500 ease-out last:mb-0 md:flex-row hover:-translate-y-3 hover:shadow-2xl hover:shadow-royal-blue/20 hover:border-royal-blue/40 cursor-pointer ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+      className={`group mb-8 flex w-full flex-col rounded-[2rem] border border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-all duration-500 ease-out last:mb-0 md:flex-row hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-700/20 hover:border-blue-700/40 cursor-pointer ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
       onClick={() => onOpenModal(slug)}
     >
       <div className="h-[200px] w-full overflow-hidden rounded-2xl md:h-[220px] md:w-[320px] md:flex-none">
@@ -43,7 +43,7 @@ function ServiceBlock({ image, alt, title, description, slug, index, onOpenModal
 
         <div className="mt-6 flex flex-wrap items-center justify-end gap-3 mt-auto">
           <button
-            className="inline-flex items-center gap-2 rounded-lg border border-[#D1D5DB] px-4 py-2 text-sm font-semibold text-[#374151] transition-all duration-300 ease-in-out group-hover:border-royal-blue group-hover:bg-royal-blue group-hover:text-white"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#D1D5DB] px-4 py-2 text-sm font-semibold text-[#374151] transition-all duration-300 ease-in-out group-hover:border-blue-700 group-hover:bg-blue-700 group-hover:text-white"
           >
             See More Details
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -51,7 +51,7 @@ function ServiceBlock({ image, alt, title, description, slug, index, onOpenModal
           <Link
             to="/contact"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center justify-center rounded-lg bg-royal-blue px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+            className="inline-flex items-center justify-center rounded-lg bg-blue-400 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
           >
             Get a Quote
           </Link>
@@ -132,7 +132,7 @@ function ServiceModal({ service, onClose }) {
         <div className="flex-1 overflow-y-auto p-8 sm:p-12 order-2 md:order-2 flex flex-col">
           <h2 className="text-4xl sm:text-5xl font-display font-black text-slate-900 mb-6">{service.title}</h2>
           
-          <h3 className="text-2xl font-bold text-royal-blue mb-4">Service Overview</h3>
+          <h3 className="text-2xl font-bold text-blue-400 mb-4">Service Overview</h3>
           <p className="text-slate-600 leading-relaxed text-lg mb-10">
             {service.fullDescription}
           </p>
@@ -143,7 +143,7 @@ function ServiceModal({ service, onClose }) {
               {service.features.map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-4">
                   <div className="mt-1 bg-blue-100 rounded-full p-1 shrink-0">
-                    <CheckCircle2 className="text-royal-blue" size={16} />
+                    <CheckCircle2 className="text-blue-400" size={16} />
                   </div>
                   <span className="text-slate-700 font-medium text-lg">{feature}</span>
                 </li>
@@ -154,7 +154,7 @@ function ServiceModal({ service, onClose }) {
           <div className="mt-auto pt-6">
             <Link 
               to="/contact" 
-              className="inline-flex justify-center items-center bg-royal-blue text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+              className="inline-flex justify-center items-center bg-blue-400 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
             >
               Get a Free Quote
             </Link>
@@ -183,7 +183,7 @@ export default function Services() {
     <>
       <section id="services-page" className="pt-32 pb-24 px-6 min-h-screen bg-slate-50">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-black text-royal-blue mb-4">Our Services</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-black text-blue-400 mb-4">Our Services</h2>
           <p className="text-xl text-gray-600">
             Expert solutions designed to effectively manage water flow and preserve your property's foundation.
           </p>
@@ -214,3 +214,4 @@ export default function Services() {
     </>
   );
 }
+

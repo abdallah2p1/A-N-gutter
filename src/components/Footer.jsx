@@ -1,18 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Send, Clock3, CheckCircle2, ChevronDown } from 'lucide-react';
-import { sendQuoteRequest, validateQuoteFields } from '../utils/quoteEmail';
+import { Phone, Mail, MapPin, Clock3, ChevronDown, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { quoteServiceOptions } from '../data/quoteServices';
-
-const initialForm = {
-  from_name: '',
-  phone: '',
-  from_email: '',
-  address: '',
-  service: '',
-  customService: '',
-  contact_method: 'Call',
-};
+import ScrollReveal from './ScrollReveal';
 
 // Social Media Icon Components (SVG)
 const FacebookIcon = () => (
@@ -36,11 +26,6 @@ const GoogleIcon = () => (
 );
 
 export default function Footer() {
-  const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [submitError, setSubmitError] = useState('');
   const [servicesOpen, setServicesOpen] = useState(false);
 
   const navLinks = [
@@ -55,71 +40,17 @@ export default function Footer() {
     { icon: GoogleIcon, label: 'Google Business Profile', href: 'https://www.google.com/search?q=A%26N+Gutters' },
   ];
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-      ...(name === 'service' && value !== 'Other' ? { customService: '' } : {}),
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: '',
-      ...(name === 'service' ? { customService: '' } : {}),
-    }));
-
-    if (submitted) setSubmitted(false);
-    setSubmitError('');
-  };
-
-  const validateForm = () => {
-    const nextErrors = validateQuoteFields(form);
-
-    if (form.service === 'Other' && !form.customService.trim()) {
-      nextErrors.customService = 'Please describe what you need.';
-    }
-
-    return nextErrors;
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const nextErrors = validateForm();
-
-    if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
-      setSubmitted(false);
-      return;
-    }
-
-    setErrors({});
-    setSubmitError('');
-    setSending(true);
-
-    try {
-      await sendQuoteRequest({
-        ...form,
-        service: form.service === 'Other' ? form.customService.trim() : form.service,
-      });
-      setSubmitted(true);
-      setForm(initialForm);
-    } catch {
-      setSubmitError('Something went wrong, please try again or call us.');
-    } finally {
-      setSending(false);
-    }
-  };
-
   return (
-    <footer className="bg-[#0f172a] text-gray-300 py-16 px-6 font-sans">
+    <footer className="bg-slate-900 text-gray-300 py-16 px-6 font-sans relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400/5 rounded-full blur-[100px] pointer-events-none"></div>
+
       {/* Main Footer Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 border-b border-gray-700 pb-12 mb-8">
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 border-b border-white/10 pb-12 mb-8">
         
-        {/* Brand & Contact Info - Full width on mobile, 1/2 on tablet, 1/4 on desktop */}
-        <div className="lg:col-span-1 flex flex-col">
+        {/* Brand & Contact Info */}
+        <ScrollReveal className="lg:col-span-1 flex flex-col">
           <h2 className="text-3xl font-display font-black text-white mb-6">
             A&N <span className="text-blue-400">Gutters</span>
           </h2>
@@ -137,7 +68,7 @@ export default function Footer() {
                 rel="noreferrer"
                 aria-label={label}
                 title={label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-600 bg-gray-900 text-blue-400 transition-all duration-300 hover:border-blue-400 hover:bg-blue-400 hover:text-white hover:shadow-lg hover:shadow-blue-400/20"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-600 bg-gray-900 text-blue-400 transition-all duration-300 hover:border-blue-700 hover:bg-blue-700 hover:text-white hover:shadow-lg hover:shadow-blue-700/20"
               >
                 <Icon />
               </a>
@@ -147,13 +78,13 @@ export default function Footer() {
           {/* Contact Details */}
           <div className="flex flex-col gap-4">
             <a href="tel:+17164953652" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 group-hover:bg-blue-400 group-hover:text-white transition-colors flex-shrink-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 group-hover:bg-blue-700 group-hover:text-white transition-colors flex-shrink-0">
                 <Phone size={18} />
               </div>
               <span className="font-medium">(716) 495-3652</span>
             </a>
             <a href="mailto:info@anconstructionpros.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 group-hover:bg-blue-400 group-hover:text-white transition-colors flex-shrink-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 group-hover:bg-blue-700 group-hover:text-white transition-colors flex-shrink-0">
                 <Mail size={18} />
               </div>
               <span className="font-medium">Info@anconstructionpros.com</span>
@@ -165,17 +96,17 @@ export default function Footer() {
               <span className="font-medium">Buffalo & Rochester, Western NY</span>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
         
         {/* Quick Links */}
-        <div className="lg:col-span-1 flex flex-col">
+        <ScrollReveal delay={0.1} className="lg:col-span-1 flex flex-col">
           <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wide">Quick Links</h3>
           <ul className="flex flex-col gap-3 mb-auto">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
                   to={link.path}
-                  className="flex items-center gap-2 text-gray-400 transition-colors hover:text-blue-400 font-medium group"
+                  className="flex items-center gap-2 text-gray-400 transition-colors hover:text-blue-700 font-medium group"
                 >
                   <span className="text-blue-400 text-sm">▸</span>
                   {link.name}
@@ -187,7 +118,7 @@ export default function Footer() {
                 type="button"
                 aria-expanded={servicesOpen}
                 onClick={() => setServicesOpen((open) => !open)}
-                className="flex w-full items-center gap-2 text-left text-gray-400 transition-colors hover:text-blue-400 font-medium group"
+                className="flex w-full items-center gap-2 text-left text-gray-400 transition-colors hover:text-blue-700 font-medium group"
               >
                 <span className="text-blue-400 text-sm">▸</span>
                 <span>Services</span>
@@ -197,7 +128,7 @@ export default function Footer() {
                 <ul className="ml-5 mt-3 flex flex-col gap-2 border-l border-blue-400/30 pl-4">
                   {quoteServiceOptions.map((service) => (
                       <li key={service}>
-                      <Link to="/services" className="text-sm text-gray-400 transition-colors hover:text-blue-400">
+                      <Link to="/services" className="text-sm text-gray-400 transition-colors hover:text-blue-700">
                           {service}
                       </Link>
                     </li>
@@ -218,133 +149,35 @@ export default function Footer() {
               <li className="flex justify-between gap-4 whitespace-nowrap"><span>Sunday</span><span className="text-gray-300 font-medium">Closed</span></li>
             </ul>
           </div>
-        </div>
+        </ScrollReveal>
 
-        {/* Lead Capture Form */}
-        <div className="lg:col-span-1 flex flex-col">
-          <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-wide">Get a Quote</h3>
-          <p className="text-sm text-gray-500 mb-6">Leave your details and we'll contact you.</p>
-          
-          <form className="flex flex-col gap-3 flex-1" onSubmit={handleSubmit} noValidate>
-            <div>
-              <input
-                type="text"
-                name="from_name"
-                value={form.from_name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                aria-invalid={Boolean(errors.from_name)}
-                aria-describedby={errors.from_name ? 'footer-name-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.from_name ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
-              />
-              {errors.from_name && <p id="footer-name-error" className="mt-1 text-xs text-red-400">{errors.from_name}</p>}
-            </div>
-
-            <div>
-              <input
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                aria-invalid={Boolean(errors.phone)}
-                aria-describedby={errors.phone ? 'footer-phone-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.phone ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
-              />
-              {errors.phone && <p id="footer-phone-error" className="mt-1 text-xs text-red-400">{errors.phone}</p>}
-            </div>
-
-            <div>
-              <input
-                type="email"
-                name="from_email"
-                value={form.from_email}
-                onChange={handleChange}
-                placeholder="Email Address"
-                aria-invalid={Boolean(errors.from_email)}
-                aria-describedby={errors.from_email ? 'footer-email-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.from_email ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
-              />
-              {errors.from_email && <p id="footer-email-error" className="mt-1 text-xs text-red-400">{errors.from_email}</p>}
-            </div>
-
-            <div>
-              <input
-                type="text"
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                placeholder="Service Address"
-                aria-invalid={Boolean(errors.address)}
-                aria-describedby={errors.address ? 'footer-address-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.address ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
-              />
-              {errors.address && <p id="footer-address-error" className="mt-1 text-xs text-red-400">{errors.address}</p>}
-            </div>
-
-            <div>
-              <select
-                name="service"
-                value={form.service}
-                onChange={handleChange}
-                aria-invalid={Boolean(errors.service)}
-                aria-describedby={errors.service ? 'footer-service-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-gray-300 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.service ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
-              >
-                <option value="" disabled>Service Needed</option>
-                {quoteServiceOptions.map((service) => <option key={service} value={service}>{service}</option>)}
-              </select>
-              {errors.service && <p id="footer-service-error" className="mt-1 text-xs text-red-400">{errors.service}</p>}
-            </div>
-
-            {form.service === 'Other' && (
-              <div className="animate-in fade-in slide-in-from-top-2 duration-200">
-                <input
-                  type="text"
-                  name="customService"
-                  value={form.customService}
-                  onChange={handleChange}
-                  placeholder="Please describe what you need"
-                  required
-                  aria-invalid={Boolean(errors.customService)}
-                  aria-describedby={errors.customService ? 'footer-custom-service-error' : undefined}
-                  className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.customService ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
-                />
-                {errors.customService && <p id="footer-custom-service-error" className="mt-1 text-xs text-red-400">{errors.customService}</p>}
-              </div>
-            )}
-
-            <div className="flex gap-3 text-xs text-gray-400">
-              <span>Preferred contact:</span>
-              {['Call', 'Text', 'Email'].map((method) => (
-                <label key={method} className="flex items-center gap-1">
-                  <input type="radio" name="contact_method" value={method} checked={form.contact_method === method} onChange={handleChange} />
-                  {method}
-                </label>
-              ))}
-            </div>
-
-            <button
-              type="submit"
-              disabled={sending}
-              className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-[#0f172a]"
+        {/* Call To Action */}
+        <ScrollReveal delay={0.2} className="lg:col-span-1 flex flex-col">
+          <div className="bg-gradient-to-br from-blue-900/50 to-blue-800/20 border border-blue-500/20 rounded-3xl p-8 h-full flex flex-col justify-center shadow-lg relative overflow-hidden group hover:border-blue-500/40 transition-colors duration-500">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[50px] group-hover:bg-blue-400/20 transition-all duration-500"></div>
+            
+            <h3 className="text-2xl font-display font-bold text-white mb-4 relative z-10">Ready to start your project?</h3>
+            <p className="text-blue-100/80 mb-8 leading-relaxed relative z-10">
+              Schedule your free, no-obligation estimate today. Our experts will inspect your home and provide a transparent quote.
+            </p>
+            
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-500 px-6 py-4 font-bold text-white transition-all hover:bg-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:-translate-y-1 relative z-10"
             >
-              {sending ? 'Sending...' : 'Send'} <Send size={16} />
-            </button>
-
-            {submitted && (
-              <div className="mt-2 flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-300">
-                <CheckCircle2 size={14} className="flex-shrink-0" />
-                Thanks! We'll be in touch.
-              </div>
-            )}
-            {submitError && <div className="mt-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-300">{submitError}</div>}
-          </form>
-        </div>
+              Get My Free Quote <ArrowRight size={18} />
+            </Link>
+            
+            <div className="mt-6 flex items-center gap-2 text-sm text-blue-200/70 font-medium justify-center relative z-10">
+              <CheckCircle2 size={16} className="text-blue-400" />
+              <span>we will contact you as soon as possible</span>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
       
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto flex flex-col items-center justify-between gap-4 pt-8 text-center text-xs text-gray-500 md:flex-row md:text-left">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center justify-between gap-4 pt-8 text-center text-xs text-gray-500 md:flex-row md:text-left">
         <p>&copy; {new Date().getFullYear()} A&N Gutters. All rights reserved.</p>
         <span className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-400/10 px-4 py-2 text-blue-400 font-medium">
           ✓ Licensed & Insured in Western NY

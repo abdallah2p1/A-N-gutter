@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { ArrowRight, BadgePercent, CheckCircle2, ChevronDown, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import residentialGuttersImage from '../assets/resdintal-gutters.jpg';
+import ScrollReveal from '../components/ScrollReveal';
+import residentialGuttersImage from '../assets/hero2.jpg';
 
 const faqs = [
   ['Can I combine multiple offers?', 'Offers cannot be combined unless explicitly stated. Each offer applies to a single qualifying service per visit.'],
@@ -51,7 +52,7 @@ export default function Offers() {
 
       {/* Offers Grid */}
       <section className="relative -mt-10 z-20 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <ScrollReveal className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Main Featured Offer */}
           <div className="lg:col-span-12 group relative bg-white rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden flex flex-col md:flex-row items-center gap-10 hover:-translate-y-2">
@@ -62,7 +63,7 @@ export default function Offers() {
                  Most Popular
                </div>
                <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-                 Free Inspection & <span className="text-royal-blue">Estimate</span>
+                 Free Inspection & <span className="text-blue-400">Estimate</span>
                </h2>
                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                  Don't wait for a leak to find out your gutters are failing. Get a completely free, no-obligation assessment of your entire gutter system by our certified experts.
@@ -85,15 +86,15 @@ export default function Offers() {
 
                <Link 
                  to="/contact" 
-                 className="inline-flex items-center gap-3 px-8 py-4 bg-royal-blue hover:bg-blue-700 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/40"
+                 className="inline-flex items-center gap-3 px-8 py-4 bg-blue-400 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/40"
                >
                  Claim Free Estimate <ArrowRight size={20} />
                </Link>
             </div>
             
             <div className="relative z-10 w-full md:w-1/2 h-full min-h-[300px] rounded-2xl overflow-hidden shadow-2xl">
-              <img src={residentialGuttersImage} alt="Residential gutters" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+              <img src={residentialGuttersImage} alt="" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 brightness-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6">
                  <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl p-4 text-white shadow-lg">
                    <p className="font-bold text-lg">"Saved me thousands!"</p>
@@ -104,7 +105,7 @@ export default function Offers() {
           </div>
 
           {/* Secondary Offer 1 */}
-          <div className="lg:col-span-6 group relative bg-gradient-to-br from-slate-900 to-blue-900 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-blue-800 overflow-hidden hover:-translate-y-2">
+          <ScrollReveal delay={0.1} className="lg:col-span-6 group relative bg-gradient-to-br from-slate-900 to-blue-900 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-blue-800 overflow-hidden hover:-translate-y-2">
             <div className="absolute -right-10 -top-10 w-40 h-40 bg-safety-orange/20 rounded-full blur-3xl group-hover:bg-safety-orange/40 transition-colors duration-500"></div>
             <div className="relative z-10 h-full flex flex-col">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-safety-orange/10 text-safety-orange font-bold uppercase tracking-wider text-xs rounded-full mb-6">
@@ -126,10 +127,10 @@ export default function Offers() {
                 Book Online Now <ArrowRight size={20} className="text-safety-orange" />
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Referral Discount */}
-          <div className="lg:col-span-6 group relative bg-white rounded-3xl p-8 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:-translate-y-2">
+          <ScrollReveal delay={0.2} className="lg:col-span-6 group relative bg-white rounded-3xl p-8 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:-translate-y-2">
             <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-orange-50 rounded-full transition-transform group-hover:scale-150 duration-700 ease-out z-0"></div>
             <div className="relative z-10 h-full flex flex-col">
               <div className="w-14 h-14 bg-orange-50 text-safety-orange rounded-2xl flex items-center justify-center mb-6 border border-orange-100 group-hover:bg-safety-orange group-hover:text-white transition-colors duration-300">
@@ -148,13 +149,13 @@ export default function Offers() {
                 <li className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 shrink-0 text-green-500" size={18} />Credited after referred job is completed</li>
               </ul>
               <Link to="/contact" className="inline-flex items-center justify-between w-full p-4 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-slate-900 font-bold transition-colors">
-                Refer a Friend <ArrowRight size={20} className="text-royal-blue" />
+                Refer a Friend <ArrowRight size={20} className="text-blue-400" />
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bundle & Save */}
-          <div className="lg:col-span-12 group relative bg-royal-blue rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-800 overflow-hidden hover:-translate-y-1">
+          <ScrollReveal delay={0.3} className="lg:col-span-12 group relative bg-blue-400 rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-800 overflow-hidden hover:-translate-y-1">
             <div className="absolute inset-0 bg-blue-400/20"></div>
             <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
               <div className="max-w-3xl">
@@ -171,60 +172,65 @@ export default function Offers() {
                 <li className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 shrink-0 text-safety-orange" size={18} />Cannot be combined with other offers</li>
               </ul>
               </div>
-              <Link to="/contact" className="inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-full border-2 border-white bg-white px-8 py-4 text-lg font-bold text-royal-blue transition-colors hover:bg-blue-100">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-full border-2 border-white bg-white px-8 py-4 text-lg font-bold text-blue-400 transition-colors hover:bg-blue-100">
                 Build My Bundle <ArrowRight size={20} />
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Labor Warranty */}
       <section className="mx-auto max-w-5xl px-6 py-20 text-slate-900">
-        <h2 className="mb-6 text-4xl font-display font-black text-royal-blue">Labor Warranty</h2>
-        <p className="mb-6 text-lg leading-relaxed text-slate-600">At A&N Gutters, we stand behind the quality of our workmanship. Our Labor Warranty covers defects directly resulting from the installation of the guttering system for a period of 1 year from the date of installation, subject to the terms and exclusions outlined below.</p>
-        <p className="mb-8 text-lg leading-relaxed text-slate-600">If a claim is determined to be covered under this warranty, A&N Gutters will repair or replace the affected installation at no cost to the customer.</p>
-        <h3 className="mb-4 text-2xl font-bold">This Labor Warranty does not cover:</h3>
-        <ol className="list-decimal space-y-4 pl-6 text-slate-600 leading-relaxed">
-          <li><strong>Acts of Nature / Acts of God</strong> — Natural events beyond our control, including but not limited to lightning, hurricanes, hail, earthquakes, floods, tornadoes, severe weather, or falling objects.</li>
-          <li><strong>Structural Movement or Failure</strong> — Damage caused by settling, cracking, movement, shifting, distortion, or splitting of the property or structure where the guttering system has been installed. This includes structural failure involving walls, roofs, foundations, fascia, or rafters.</li>
-          <li><strong>Ventilation, Drainage, or Structural Deficiencies</strong> — Problems resulting from inadequate or improper home ventilation, water accumulation, ice damming, mold, insufficient drainage, or other structural deficiencies unrelated to the installation.</li>
-          <li><strong>Negligence, Misuse, or Unauthorized Work</strong> — Damage resulting from deliberate acts, negligence, misuse, modification, or improper installation or maintenance by the purchaser, another contractor, workman, or any other person.</li>
-          <li><strong>Normal Wear and Tear</strong> — Normal deterioration consistent with the manufacturer's specifications. The manufacturer has final determination on product replacement claims.</li>
-          <li><strong>Cosmetic and Pre-Existing Conditions</strong> — Color fading, staining, erosion, replacement of rotten or deteriorated wood, or water entering behind gutters where required eave/drip-edge metal has not been installed.</li>
-          <li><strong>Materials Not Supplied by A&N Gutters</strong> — Any materials, components, or products installed as part of the guttering system that were not supplied by A&N Gutters.</li>
-          <li><strong>Expansion and Contraction</strong> — Damage or movement resulting from the natural expansion or contraction of windows, siding, roofing materials, concrete, trim, or other building materials.</li>
-          <li><strong>Improper Customer Maintenance</strong> — Failure to properly maintain the guttering system, including but not limited to clogged gutters or downspouts caused by leaves, dirt, branches, or other debris.</li>
-        </ol>
-        <h3 className="mb-4 mt-10 text-2xl font-bold">Warranty Limitations</h3>
-        <p className="text-lg leading-relaxed text-slate-600">This warranty applies only to workmanship performed by A&N Gutters and does not extend to conditions, materials, or circumstances outside our control. Proper maintenance of the guttering system is the customer's responsibility and is required to maintain warranty coverage.</p>
-        <h3 className="mb-4 mt-10 text-2xl font-bold">To Make a Claim</h3>
-        <p className="text-lg leading-relaxed text-slate-600">If you believe there is an issue covered under this Labor Warranty, please contact A&N Gutters as soon as possible:</p>
-        <p className="mt-4 text-lg leading-relaxed text-slate-600"><strong>Phone:</strong> <a href="tel:+17164953652" className="hover:text-blue-400">(716) 495-3652</a><br /><strong>Email:</strong> <a href="mailto:Info@anconstructionpros.com" className="hover:text-blue-400">Info@anconstructionpros.com</a></p>
-        <p className="mt-4 text-lg leading-relaxed text-slate-600">We will inspect the installation and determine the appropriate course of action. If the claim is approved, we will repair or replace the affected installation at no cost to you.</p>
+        <ScrollReveal>
+          <h2 className="mb-6 text-4xl font-display font-black text-blue-400">Labor Warranty</h2>
+          <p className="mb-6 text-lg leading-relaxed text-slate-600">At A&N Gutters, we stand behind the quality of our workmanship. Our Labor Warranty covers defects directly resulting from the installation of the guttering system for a period of 1 year from the date of installation, subject to the terms and exclusions outlined below.</p>
+          <p className="mb-8 text-lg leading-relaxed text-slate-600">If a claim is determined to be covered under this warranty, A&N Gutters will repair or replace the affected installation at no cost to the customer.</p>
+          <h3 className="mb-4 text-2xl font-bold">This Labor Warranty does not cover:</h3>
+          <ol className="list-decimal space-y-4 pl-6 text-slate-600 leading-relaxed">
+            <li><strong>Acts of Nature / Acts of God</strong> — Natural events beyond our control, including but not limited to lightning, hurricanes, hail, earthquakes, floods, tornadoes, severe weather, or falling objects.</li>
+            <li><strong>Structural Movement or Failure</strong> — Damage caused by settling, cracking, movement, shifting, distortion, or splitting of the property or structure where the guttering system has been installed. This includes structural failure involving walls, roofs, foundations, fascia, or rafters.</li>
+            <li><strong>Ventilation, Drainage, or Structural Deficiencies</strong> — Problems resulting from inadequate or improper home ventilation, water accumulation, ice damming, mold, insufficient drainage, or other structural deficiencies unrelated to the installation.</li>
+            <li><strong>Negligence, Misuse, or Unauthorized Work</strong> — Damage resulting from deliberate acts, negligence, misuse, modification, or improper installation or maintenance by the purchaser, another contractor, workman, or any other person.</li>
+            <li><strong>Normal Wear and Tear</strong> — Normal deterioration consistent with the manufacturer's specifications. The manufacturer has final determination on product replacement claims.</li>
+            <li><strong>Cosmetic and Pre-Existing Conditions</strong> — Color fading, staining, erosion, replacement of rotten or deteriorated wood, or water entering behind gutters where required eave/drip-edge metal has not been installed.</li>
+            <li><strong>Materials Not Supplied by A&N Gutters</strong> — Any materials, components, or products installed as part of the guttering system that were not supplied by A&N Gutters.</li>
+            <li><strong>Expansion and Contraction</strong> — Damage or movement resulting from the natural expansion or contraction of windows, siding, roofing materials, concrete, trim, or other building materials.</li>
+            <li><strong>Improper Customer Maintenance</strong> — Failure to properly maintain the guttering system, including but not limited to clogged gutters or downspouts caused by leaves, dirt, branches, or other debris.</li>
+          </ol>
+          <h3 className="mb-4 mt-10 text-2xl font-bold">Warranty Limitations</h3>
+          <p className="text-lg leading-relaxed text-slate-600">This warranty applies only to workmanship performed by A&N Gutters and does not extend to conditions, materials, or circumstances outside our control. Proper maintenance of the guttering system is the customer's responsibility and is required to maintain warranty coverage.</p>
+          <h3 className="mb-4 mt-10 text-2xl font-bold">To Make a Claim</h3>
+          <p className="text-lg leading-relaxed text-slate-600">If you believe there is an issue covered under this Labor Warranty, please contact A&N Gutters as soon as possible:</p>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600"><strong>Phone:</strong> <a href="tel:+17164953652" className="hover:text-blue-700">(716) 495-3652</a><br /><strong>Email:</strong> <a href="mailto:Info@anconstructionpros.com" className="hover:text-blue-700">Info@anconstructionpros.com</a></p>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">We will inspect the installation and determine the appropriate course of action. If the claim is approved, we will repair or replace the affected installation at no cost to you.</p>
+        </ScrollReveal>
       </section>
 
       {/* Frequently Asked Questions */}
       <section className="mx-auto max-w-5xl px-6 pb-20">
-        <h2 className="mb-8 text-4xl font-display font-black text-royal-blue">Frequently Asked Questions</h2>
-        <div className="divide-y divide-slate-200 border-y border-slate-200">
-          {faqs.map(([question, answer], index) => (
-            <div key={question}>
-              <button
-                type="button"
-                aria-expanded={openFaq === index}
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="flex w-full items-center justify-between gap-6 py-5 text-left text-lg font-bold text-slate-900"
-              >
-                {question}
-                <ChevronDown className={`flex-none transition-transform duration-200 ${openFaq === index ? 'rotate-180' : ''}`} />
-              </button>
-              {openFaq === index && <p className="pb-5 pr-10 leading-relaxed text-slate-600">{answer}</p>}
-            </div>
-          ))}
-        </div>
+        <ScrollReveal>
+          <h2 className="mb-8 text-4xl font-display font-black text-blue-400">Frequently Asked Questions</h2>
+          <div className="divide-y divide-slate-200 border-y border-slate-200">
+            {faqs.map(([question, answer], index) => (
+              <div key={question}>
+                <button
+                  type="button"
+                  aria-expanded={openFaq === index}
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="flex w-full items-center justify-between gap-6 py-5 text-left text-lg font-bold text-slate-900"
+                >
+                  {question}
+                  <ChevronDown className={`flex-none transition-transform duration-200 ${openFaq === index ? 'rotate-180' : ''}`} />
+                </button>
+                {openFaq === index && <p className="pb-5 pr-10 leading-relaxed text-slate-600">{answer}</p>}
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </section>
     </div>
   );
 }
+

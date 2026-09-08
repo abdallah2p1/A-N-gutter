@@ -66,7 +66,7 @@ export default function Header() {
                 <Link 
                   to="/"
                   onClick={handleLinkClick}
-                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
+                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-blue-700 transition-all"
                 >
                   Home
                 </Link>
@@ -76,7 +76,7 @@ export default function Header() {
               <li className="relative group">
                 <Link 
                   to="/services"
-                  className="flex items-center gap-1 text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all cursor-pointer"
+                  className="flex items-center gap-1 text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-blue-700 transition-all cursor-pointer"
                 >
                   Services
                   <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
@@ -90,7 +90,7 @@ export default function Header() {
                         key={service.slug}
                         to={`/services?service=${service.slug}`}
                         onClick={handleLinkClick}
-                        className="px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-royal-blue text-sm font-semibold rounded-xl transition-colors"
+                        className="px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-blue-700 text-sm font-semibold rounded-xl transition-colors"
                       >
                         {service.title}
                       </Link>
@@ -103,7 +103,7 @@ export default function Header() {
                 <Link 
                   to="/offers"
                   onClick={handleLinkClick}
-                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
+                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-blue-700 transition-all"
                 >
                   What we offer
                 </Link>
@@ -112,7 +112,7 @@ export default function Header() {
                 <Link 
                   to="/contact"
                   onClick={handleLinkClick}
-                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-royal-blue transition-all"
+                  className="text-third-grey font-medium px-5 py-2 rounded-full hover:bg-gray-100 hover:text-blue-700 transition-all"
                 >
                   Contact
                 </Link>
@@ -146,7 +146,7 @@ export default function Header() {
                 <Link 
                   to="/" 
                   onClick={handleLinkClick}
-                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
+                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-blue-700 transition-colors"
                 >
                   Home
                 </Link>
@@ -155,7 +155,7 @@ export default function Header() {
               {/* Mobile Services Dropdown */}
               <li className="flex flex-col">
                 <div 
-                  className="flex items-center justify-between px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors cursor-pointer"
+                  className="flex items-center justify-between px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-blue-700 transition-colors cursor-pointer"
                   onClick={() => setServicesExpanded(!servicesExpanded)}
                 >
                   <Link to="/services" onClick={(e) => { e.stopPropagation(); handleLinkClick(); }}>Services</Link>
@@ -168,7 +168,7 @@ export default function Header() {
                         key={service.slug}
                         to={`/services?service=${service.slug}`}
                         onClick={handleLinkClick}
-                        className="block px-4 py-2 text-base font-medium text-gray-600 hover:text-royal-blue"
+                        className="block px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-700"
                       >
                         {service.title}
                       </Link>
@@ -181,7 +181,7 @@ export default function Header() {
                 <Link 
                   to="/offers" 
                   onClick={handleLinkClick}
-                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
+                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-blue-700 transition-colors"
                 >
                   What we offer
                 </Link>
@@ -190,7 +190,7 @@ export default function Header() {
                 <Link 
                   to="/contact" 
                   onClick={handleLinkClick}
-                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-royal-blue transition-colors"
+                  className="block px-4 py-3 rounded-xl text-lg font-semibold text-third-grey hover:bg-gray-50 hover:text-blue-700 transition-colors"
                 >
                   Contact
                 </Link>
@@ -198,7 +198,7 @@ export default function Header() {
             </ul>
             <a
               href="tel:+17164953652"
-              className="flex items-center justify-center gap-2 w-full mt-4 px-6 py-3 bg-royal-blue hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-md transition-colors"
+              className="flex items-center justify-center gap-2 w-full mt-4 px-6 py-3 bg-blue-400 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-md transition-colors"
             >
               <Phone size={20} />
               Call Now
@@ -209,3 +209,4 @@ export default function Header() {
     </div>
   );
 }
+

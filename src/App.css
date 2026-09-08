@@ -11,7 +11,7 @@ section,
 
 @theme {
   /* Colors */
-  --color-royal-blue: #1d4ed8; /* Tailwind blue-700 */
+
   --color-safety-white: #ffffff; /* Tailwind orange-500 */
   --color-third-grey:#626262;
   /* Background Colors */
@@ -93,4 +93,13 @@ section,
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8; /* slate-400 */
+}
+
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 15s ease-out forwards;
 }
