@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { MapPin, Clock, Mail, Phone, ShieldCheck, Star, CheckCircle2, ChevronDown, X, Info } from 'lucide-react';
-import { sendQuoteRequest, validateQuoteFields } from '../utils/quoteEmail';
+import { sendQuoteEmail } from '../utils/sendQuoteEmail';
 import { quoteServiceOptions } from '../data/quoteServices';
 
 const initialForm = {
@@ -20,6 +20,7 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -69,61 +70,42 @@ export default function Contact() {
     }));
   };
 
-  const validateForm = () => {
-    const fieldErrors = validateQuoteFields({
-      from_name: form.name,
-      phone: form.phone,
-      from_email: form.email,
-      address: form.address,
-      service: form.services,
-      contact_method: form.preferredContact,
-    });
-
-    if (form.name.trim().length === 1) fieldErrors.from_name = 'Name must be at least 2 characters.';
-    if (form.services.includes('Other') && !form.customService.trim()) {
-      fieldErrors.customService = 'Please describe what you need.';
-    }
-
-    return Object.fromEntries(
-      Object.entries({
-        name: fieldErrors.from_name,
-        phone: fieldErrors.phone,
-        email: fieldErrors.from_email,
-        address: fieldErrors.address,
-        services: fieldErrors.service,
-        customService: fieldErrors.customService,
-        preferredContact: fieldErrors.contact_method,
-      }).filter(([, message]) => message),
-    );
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const nextErrors = validateForm();
-
-    if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
-      setSubmitted(false);
-      return;
-    }
-
     setErrors({});
     setSubmitError('');
     setSending(true);
 
+    if (form.services.includes('Other') && !form.customService.trim()) {
+      setErrors({ customService: 'Please describe what you need.' });
+      setSending(false);
+      return;
+    }
+
     try {
-      await sendQuoteRequest({
+      await sendQuoteEmail({
         from_name: form.name,
         phone: form.phone,
         from_email: form.email,
         address: form.address,
-        service: form.services.map(s => s === 'Other' ? `Other (${form.customService.trim()})` : s).join(', '),
+        service: form.services,
+        customService: form.customService,
         contact_method: form.preferredContact,
+        message: "",
       });
       setSubmitted(true);
       setForm(initialForm);
-    } catch {
-      setSubmitError('Something went wrong, please try again or call us.');
+    } catch (error) {
+      if (error.validationErrors) {
+        setErrors({
+          name: error.validationErrors.from_name,
+          phone: error.validationErrors.phone,
+          email: error.validationErrors.from_email,
+          services: error.validationErrors.service,
+        });
+      } else {
+        setSubmitError('Something went wrong. Please try again or call us directly at (716) 495-3652');
+      }
     } finally {
       setSending(false);
     }
@@ -413,7 +395,7 @@ export default function Contact() {
 
               {submitted && (
                 <div className="rounded-2xl border border-green-300/50 bg-green-500/20 backdrop-blur-md px-5 py-4 text-white font-medium text-center shadow-inner animate-in fade-in zoom-in duration-300">
-                  Thanks! Your request has been sent. We'll be in touch shortly.
+                  Thank you! We've received your request and will be in touch shortly.
                 </div>
               )}
 
