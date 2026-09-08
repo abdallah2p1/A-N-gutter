@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Send, Clock3, CheckCircle2, ChevronDown } from 'lucide-react';
 import { sendQuoteRequest, validateQuoteFields } from '../utils/quoteEmail';
-import { services } from '../data/services';
+import { quoteServiceOptions } from '../data/quoteServices';
 
 const initialForm = {
   from_name: '',
@@ -10,6 +10,7 @@ const initialForm = {
   from_email: '',
   address: '',
   service: '',
+  customService: '',
   contact_method: 'Call',
 };
 
@@ -60,11 +61,13 @@ export default function Footer() {
     setForm((prev) => ({
       ...prev,
       [name]: value,
+      ...(name === 'service' && value !== 'Other' ? { customService: '' } : {}),
     }));
 
     setErrors((prev) => ({
       ...prev,
       [name]: '',
+      ...(name === 'service' ? { customService: '' } : {}),
     }));
 
     if (submitted) setSubmitted(false);
@@ -72,7 +75,13 @@ export default function Footer() {
   };
 
   const validateForm = () => {
-    return validateQuoteFields(form);
+    const nextErrors = validateQuoteFields(form);
+
+    if (form.service === 'Other' && !form.customService.trim()) {
+      nextErrors.customService = 'Please describe what you need.';
+    }
+
+    return nextErrors;
   };
 
   const handleSubmit = async (event) => {
@@ -91,7 +100,10 @@ export default function Footer() {
     setSending(true);
 
     try {
-      await sendQuoteRequest(form);
+      await sendQuoteRequest({
+        ...form,
+        service: form.service === 'Other' ? form.customService.trim() : form.service,
+      });
       setSubmitted(true);
       setForm(initialForm);
     } catch {
@@ -109,7 +121,7 @@ export default function Footer() {
         {/* Brand & Contact Info - Full width on mobile, 1/2 on tablet, 1/4 on desktop */}
         <div className="lg:col-span-1 flex flex-col">
           <h2 className="text-3xl font-display font-black text-white mb-6">
-            A&N <span className="text-sky-400">Gutters</span>
+            A&N <span className="text-blue-400">Gutters</span>
           </h2>
           <p className="text-gray-400 mb-8 leading-relaxed">
             Professional seamless gutter installation, guards, and repair services since 2018. Quality that protects your home.
@@ -134,23 +146,23 @@ export default function Footer() {
 
           {/* Contact Details */}
           <div className="flex flex-col gap-4">
-            <a href="tel:5555555555" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
+            <a href="tel:7164953652" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/10 text-sky-400 ring-1 ring-sky-500/30 group-hover:bg-sky-500 group-hover:text-white transition-colors flex-shrink-0">
                 <Phone size={18} />
               </div>
-              <span className="font-medium">(555) 555-5555</span>
+              <span className="font-medium">(716) 495-3652</span>
             </a>
-            <a href="mailto:info@angutters.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
+            <a href="mailto:info@anconstructionpros.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/10 text-sky-400 ring-1 ring-sky-500/30 group-hover:bg-sky-500 group-hover:text-white transition-colors flex-shrink-0">
                 <Mail size={18} />
               </div>
-              <span className="font-medium">info@angutters.com</span>
+              <span className="font-medium">Info@anconstructionpros.com</span>
             </a>
             <div className="flex items-center gap-3 text-gray-300 group">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/10 text-sky-400 ring-1 ring-sky-500/30 transition-colors flex-shrink-0">
                 <MapPin size={18} />
               </div>
-              <span className="font-medium">Buffalo & Rochester, NY</span>
+              <span className="font-medium">Buffalo & Rochester, Western NY</span>
             </div>
           </div>
         </div>
@@ -183,10 +195,10 @@ export default function Footer() {
               </button>
               {servicesOpen && (
                 <ul className="ml-5 mt-3 flex flex-col gap-2 border-l border-sky-500/30 pl-4">
-                  {services.map((service) => (
-                    <li key={service.name}>
+                  {quoteServiceOptions.map((service) => (
+                      <li key={service}>
                       <Link to="/services" className="text-sm text-gray-400 transition-colors hover:text-sky-400">
-                        {service.name}
+                          {service}
                       </Link>
                     </li>
                   ))}
@@ -197,13 +209,12 @@ export default function Footer() {
 
           {/* Business Hours Card */}
           <div className="mt-8 w-full max-w-md rounded-2xl border border-gray-700 bg-gray-900/50 p-5">
-            <div className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-sky-400">
+            <div className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-blue-400">
               <Clock3 size={16} />
               Business Hours
             </div>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li className="flex justify-between gap-4 whitespace-nowrap"><span>Mon - Fri</span><span className="text-gray-300 font-medium">8:00am - 6:00pm</span></li>
-              <li className="flex justify-between gap-4 whitespace-nowrap"><span>Saturday</span><span className="text-gray-300 font-medium">9:00am - 2:00pm</span></li>
+              <li className="flex justify-between gap-4 whitespace-nowrap"><span>Mon - Sat</span><span className="text-gray-300 font-medium">7:00am - 5:00pm</span></li>
               <li className="flex justify-between gap-4 whitespace-nowrap"><span>Sunday</span><span className="text-gray-300 font-medium">Closed</span></li>
             </ul>
           </div>
@@ -280,11 +291,28 @@ export default function Footer() {
                 aria-describedby={errors.service ? 'footer-service-error' : undefined}
                 className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-gray-300 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.service ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
               >
-                <option value="">Service Needed</option>
-                {services.map((service) => <option key={service.name} value={service.name}>{service.name}</option>)}
+                <option value="" disabled>Service Needed</option>
+                {quoteServiceOptions.map((service) => <option key={service} value={service}>{service}</option>)}
               </select>
               {errors.service && <p id="footer-service-error" className="mt-1 text-xs text-red-400">{errors.service}</p>}
             </div>
+
+            {form.service === 'Other' && (
+              <div className="animate-in fade-in slide-in-from-top-2 duration-200">
+                <input
+                  type="text"
+                  name="customService"
+                  value={form.customService}
+                  onChange={handleChange}
+                  placeholder="Please describe what you need"
+                  required
+                  aria-invalid={Boolean(errors.customService)}
+                  aria-describedby={errors.customService ? 'footer-custom-service-error' : undefined}
+                  className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.customService ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                />
+                {errors.customService && <p id="footer-custom-service-error" className="mt-1 text-xs text-red-400">{errors.customService}</p>}
+              </div>
+            )}
 
             <div className="flex gap-3 text-xs text-gray-400">
               <span>Preferred contact:</span>
@@ -319,7 +347,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col items-center justify-between gap-4 pt-8 text-center text-xs text-gray-500 md:flex-row md:text-left">
         <p>&copy; {new Date().getFullYear()} A&N Gutters. All rights reserved.</p>
         <span className="inline-flex items-center rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-2 text-sky-300 font-medium">
-          ✓ Licensed & Insured in NY
+          ✓ Licensed & Insured in Western NY
         </span>
       </div>
     </footer>

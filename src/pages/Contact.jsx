@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { MapPin, Clock, Mail, Home, Phone, ShieldCheck, Star, CheckCircle2 } from 'lucide-react';
+import { MapPin, Clock, Mail, Phone, ShieldCheck, Star, CheckCircle2 } from 'lucide-react';
 import { sendQuoteRequest, validateQuoteFields } from '../utils/quoteEmail';
-import { services } from '../data/services';
+import { quoteServiceOptions } from '../data/quoteServices';
 
 const initialForm = {
   name: '',
@@ -9,6 +9,7 @@ const initialForm = {
   email: '',
   address: '',
   service: '',
+  customService: '',
   preferredContact: 'Call',
 };
 
@@ -25,11 +26,13 @@ export default function Contact() {
     setForm((prev) => ({
       ...prev,
       [name]: value,
+      ...(name === 'service' && value !== 'Other' ? { customService: '' } : {}),
     }));
 
     setErrors((prev) => ({
       ...prev,
       [name]: '',
+      ...(name === 'service' ? { customService: '' } : {}),
     }));
 
     if (submitted) setSubmitted(false);
@@ -47,6 +50,9 @@ export default function Contact() {
     });
 
     if (form.name.trim().length === 1) fieldErrors.from_name = 'Name must be at least 2 characters.';
+    if (form.service === 'Other' && !form.customService.trim()) {
+      fieldErrors.customService = 'Please describe what you need.';
+    }
 
     return Object.fromEntries(
       Object.entries({
@@ -55,6 +61,7 @@ export default function Contact() {
         email: fieldErrors.from_email,
         address: fieldErrors.address,
         service: fieldErrors.service,
+        customService: fieldErrors.customService,
         preferredContact: fieldErrors.contact_method,
       }).filter(([, message]) => message),
     );
@@ -80,7 +87,7 @@ export default function Contact() {
         phone: form.phone,
         from_email: form.email,
         address: form.address,
-        service: form.service,
+        service: form.service === 'Other' ? form.customService.trim() : form.service,
         contact_method: form.preferredContact,
       });
       setSubmitted(true);
@@ -99,11 +106,11 @@ export default function Contact() {
         {/* Contact Info */}
         <div className="flex flex-col justify-center">
           <a
-            href="tel:5555555555"
-            className="inline-flex items-center gap-3 w-fit rounded-full bg-blue-700 px-5 py-3 text-lg font-bold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-200 mb-5"
+            href="tel:7164953652"
+            className="inline-flex items-center gap-3 w-fit rounded-full bg-blue-400 px-5 py-3 text-lg font-bold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-200 mb-5"
           >
             <Phone className="h-5 w-5" />
-            (555) 555-5555
+            (716) 495-3652
           </a>
 
           <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Get In Touch</h2>
@@ -123,8 +130,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-1">Service Areas</h4>
-                <p className="text-slate-600">Buffalo, NY & Surrounding Areas</p>
-                <p className="text-slate-600">Rochester, NY & Surrounding Areas</p>
+                <p className="text-slate-600">Buffalo & Rochester Surrounding Areas, Western NY</p>
               </div>
             </div>
 
@@ -134,21 +140,10 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-1">Email</h4>
-                <p className="text-slate-600">7masa.zaatreh@gmail.com</p>
+                <p className="text-slate-600">Info@anconstructionpros.com</p>
               </div>
             </div>
 
-            <div className="flex gap-5 items-start rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="p-3 rounded-2xl bg-blue-100">
-                <Home className="w-6 h-6 text-blue-700" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-slate-900 mb-1">Address</h4>
-                <p className="text-slate-600">123 Main Street</p>
-                <p className="text-slate-600">Buffalo, NY 14201</p>
-              </div>
-            </div>
-            
             <div className="flex gap-5 items-start rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <div className="p-3 rounded-2xl bg-blue-100">
                 <Clock className="w-6 h-6 text-blue-700" />
@@ -176,15 +171,15 @@ export default function Contact() {
         </div>
         
         {/* Contact Form */}
-        <div className="bg-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100">
+        <div className="bg-blue-400 p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100">
           <div className="mb-6">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-700">Free Estimate</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-white">Free Estimate</p>
             <h3 className="mt-2 text-3xl font-extrabold text-slate-900">Request a Quote</h3>
           </div>
 
           <form className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
             <div>
-              <label htmlFor="name" className="block text-slate-700 font-semibold mb-2">Full Name</label>
+              <label htmlFor="name" className="block text-white font-semibold mb-2">Full Name</label>
               <input 
                 type="text"
                 id="name"
@@ -194,29 +189,29 @@ export default function Contact() {
                 placeholder="John Doe"
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? 'name-error' : undefined}
-                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-slate-900 text-base ${errors.name ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
+                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-700 transition-all text-slate-900 text-base ${errors.name ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
               />
               {errors.name && <p id="name-error" className="mt-2 text-sm text-red-600">{errors.name}</p>}
             </div>
             
             <div>
-              <label htmlFor="phone" className="block text-slate-700 font-semibold mb-2">Phone Number</label>
+              <label htmlFor="phone" className="block text-white font-semibold mb-2">Phone Number</label>
               <input 
                 type="tel"
                 id="phone"
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
-                placeholder="(555) 123-4567"
+                placeholder="(716) 495-3652"
                 aria-invalid={Boolean(errors.phone)}
                 aria-describedby={errors.phone ? 'phone-error' : undefined}
-                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-slate-900 text-base ${errors.phone ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
+                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-700 transition-all text-slate-900 text-base ${errors.phone ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
               />
               {errors.phone && <p id="phone-error" className="mt-2 text-sm text-red-600">{errors.phone}</p>}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-slate-700 font-semibold mb-2">Email Address</label>
+              <label htmlFor="email" className="block text-white font-semibold mb-2">Email Address</label>
               <input 
                 type="email"
                 id="email"
@@ -226,13 +221,13 @@ export default function Contact() {
                 placeholder="john@example.com"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? 'email-error' : undefined}
-                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-slate-900 text-base ${errors.email ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
+                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-700 transition-all text-slate-900 text-base ${errors.email ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
               />
               {errors.email && <p id="email-error" className="mt-2 text-sm text-red-600">{errors.email}</p>}
             </div>
 
             <div>
-              <label htmlFor="address" className="block text-slate-700 font-semibold mb-2">Address</label>
+              <label htmlFor="address" className="block text-white font-semibold mb-2">Address</label>
               <input 
                 type="text"
                 id="address"
@@ -242,13 +237,13 @@ export default function Contact() {
                 placeholder="123 Main Street, Buffalo, NY"
                 aria-invalid={Boolean(errors.address)}
                 aria-describedby={errors.address ? 'address-error' : undefined}
-                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-slate-900 text-base ${errors.address ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
+                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-700 transition-all text-slate-900 text-base ${errors.address ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
               />
               {errors.address && <p id="address-error" className="mt-2 text-sm text-red-600">{errors.address}</p>}
             </div>
 
             <div>
-              <label htmlFor="service" className="block text-slate-700 font-semibold mb-2">Service Needed</label>
+              <label htmlFor="service" className="block text-white font-semibold mb-2">Service Needed</label>
               <select
                 id="service"
                 name="service"
@@ -256,18 +251,37 @@ export default function Contact() {
                 onChange={handleChange}
                 aria-invalid={Boolean(errors.service)}
                 aria-describedby={errors.service ? 'service-error' : undefined}
-                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-slate-900 text-base appearance-none ${errors.service ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
+                className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-700 transition-all text-slate-900 text-base appearance-none ${errors.service ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
               >
-                <option value="">Select your service</option>
-                {services.map((option) => (
-                  <option key={option.name} value={option.name}>{option.name}</option>
+                <option value="" disabled>Select your service</option>
+                {quoteServiceOptions.map((option) => (
+                  <option key={option} value={option}>{option}</option>
                 ))}
               </select>
               {errors.service && <p id="service-error" className="mt-2 text-sm text-red-600">{errors.service}</p>}
             </div>
 
+            {form.service === 'Other' && (
+              <div className="animate-in fade-in slide-in-from-top-2 duration-200">
+                <label htmlFor="customService" className="block text-white font-semibold mb-2">Please describe what you need</label>
+                <input
+                  type="text"
+                  id="customService"
+                  name="customService"
+                  value={form.customService}
+                  onChange={handleChange}
+                  placeholder="Please describe what you need"
+                  required
+                  aria-invalid={Boolean(errors.customService)}
+                  aria-describedby={errors.customService ? 'custom-service-error' : undefined}
+                  className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-slate-900 placeholder:text-gray-500 text-base ${errors.customService ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
+                />
+                {errors.customService && <p id="custom-service-error" className="mt-2 text-sm text-red-600">{errors.customService}</p>}
+              </div>
+            )}
+
             <div>
-              <label className="block text-slate-700 font-semibold mb-2">Preferred Contact Method</label>
+              <label className="block text-white font-semibold mb-2">Preferred Contact Method</label>
               <div className="flex flex-col sm:flex-row gap-3">
                 {['Call', 'Text', 'Email'].map((method) => (
                   <label key={method} className="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:border-blue-300">
@@ -279,7 +293,7 @@ export default function Contact() {
                       onChange={handleChange}
                       className="h-4 w-4 text-blue-700 accent-blue-700"
                     />
-                    <span className="text-slate-700 font-medium">{method}</span>
+                    <span className="text-black  font-medium">{method}</span>
                   </label>
                 ))}
               </div>
@@ -289,12 +303,11 @@ export default function Contact() {
             <button 
               type="submit"
               disabled={sending}
-              className="w-full py-4 mt-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all focus:outline-none focus:ring-4 focus:ring-blue-200"
-            >
+              className="w-full py-4 mt-2 bg-blue-700 hover:bg-[#0f172a] text-white rounded-xl font-bold text-lg shadow-[0_4px_12px_rgba(30,58,138,0.45)] hover:shadow-[0_6px_16px_rgba(29,78,216,0.45)] transform hover:-translate-y-1 transition-all focus:outline-none focus:ring-4 focus:ring-blue-200"            >
               {sending ? 'Sending...' : 'Request Quote'}
             </button>
 
-            <p className="text-center text-sm text-slate-500">No spam — we'll only contact you about your service.</p>
+            <p className="text-center text-sm text-white">No spam — we'll only contact you about your service.</p>
 
             {submitted && (
               <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-green-700 font-medium text-sm">
