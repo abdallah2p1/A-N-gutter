@@ -120,8 +120,8 @@ export default function Header() {
             </ul>
             
             <a
-              href="tel:5555555555"
-              className="ml-2 flex items-center gap-2 px-6 py-2.5 bg-royal-blue hover:bg-blue-700 text-white rounded-xl font-bold transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg shadow-blue-500/20"
+              href="tel:+17164953652"
+              className="ml-2 flex items-center gap-2 px-6 py-2.5 bg-blue-400 hover:bg-blue-700 text-white rounded-xl font-bold transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg shadow-blue-500/20"
             >
               <Phone size={18} />
               Call Now
@@ -196,8 +196,8 @@ export default function Header() {
                 </Link>
               </li>
             </ul>
-            <a 
-              href="tel:5555555555" 
+            <a
+              href="tel:+17164953652"
               className="flex items-center justify-center gap-2 w-full mt-4 px-6 py-3 bg-royal-blue hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-md transition-colors"
             >
               <Phone size={20} />

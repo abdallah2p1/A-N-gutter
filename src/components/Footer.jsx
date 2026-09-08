@@ -137,7 +137,7 @@ export default function Footer() {
                 rel="noreferrer"
                 aria-label={label}
                 title={label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-600 bg-gray-900 text-sky-400 transition-all duration-300 hover:border-sky-400 hover:bg-sky-500 hover:text-white hover:shadow-lg hover:shadow-sky-500/20"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-600 bg-gray-900 text-blue-400 transition-all duration-300 hover:border-blue-400 hover:bg-blue-400 hover:text-white hover:shadow-lg hover:shadow-blue-400/20"
               >
                 <Icon />
               </a>
@@ -146,20 +146,20 @@ export default function Footer() {
 
           {/* Contact Details */}
           <div className="flex flex-col gap-4">
-            <a href="tel:7164953652" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/10 text-sky-400 ring-1 ring-sky-500/30 group-hover:bg-sky-500 group-hover:text-white transition-colors flex-shrink-0">
+            <a href="tel:+17164953652" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 group-hover:bg-blue-400 group-hover:text-white transition-colors flex-shrink-0">
                 <Phone size={18} />
               </div>
               <span className="font-medium">(716) 495-3652</span>
             </a>
             <a href="mailto:info@anconstructionpros.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/10 text-sky-400 ring-1 ring-sky-500/30 group-hover:bg-sky-500 group-hover:text-white transition-colors flex-shrink-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 group-hover:bg-blue-400 group-hover:text-white transition-colors flex-shrink-0">
                 <Mail size={18} />
               </div>
               <span className="font-medium">Info@anconstructionpros.com</span>
             </a>
             <div className="flex items-center gap-3 text-gray-300 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/10 text-sky-400 ring-1 ring-sky-500/30 transition-colors flex-shrink-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 transition-colors flex-shrink-0">
                 <MapPin size={18} />
               </div>
               <span className="font-medium">Buffalo & Rochester, Western NY</span>
@@ -175,9 +175,9 @@ export default function Footer() {
               <li key={link.name}>
                 <Link
                   to={link.path}
-                  className="flex items-center gap-2 text-gray-400 transition-colors hover:text-sky-400 font-medium group"
+                  className="flex items-center gap-2 text-gray-400 transition-colors hover:text-blue-400 font-medium group"
                 >
-                  <span className="text-sky-400 text-sm">▸</span>
+                  <span className="text-blue-400 text-sm">▸</span>
                   {link.name}
                 </Link>
               </li>
@@ -187,17 +187,17 @@ export default function Footer() {
                 type="button"
                 aria-expanded={servicesOpen}
                 onClick={() => setServicesOpen((open) => !open)}
-                className="flex w-full items-center gap-2 text-left text-gray-400 transition-colors hover:text-sky-400 font-medium group"
+                className="flex w-full items-center gap-2 text-left text-gray-400 transition-colors hover:text-blue-400 font-medium group"
               >
-                <span className="text-sky-400 text-sm">▸</span>
+                <span className="text-blue-400 text-sm">▸</span>
                 <span>Services</span>
                 <ChevronDown size={16} className={`ml-1 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
               </button>
               {servicesOpen && (
-                <ul className="ml-5 mt-3 flex flex-col gap-2 border-l border-sky-500/30 pl-4">
+                <ul className="ml-5 mt-3 flex flex-col gap-2 border-l border-blue-400/30 pl-4">
                   {quoteServiceOptions.map((service) => (
                       <li key={service}>
-                      <Link to="/services" className="text-sm text-gray-400 transition-colors hover:text-sky-400">
+                      <Link to="/services" className="text-sm text-gray-400 transition-colors hover:text-blue-400">
                           {service}
                       </Link>
                     </li>
@@ -235,7 +235,7 @@ export default function Footer() {
                 placeholder="Your Name"
                 aria-invalid={Boolean(errors.from_name)}
                 aria-describedby={errors.from_name ? 'footer-name-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.from_name ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.from_name ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
               />
               {errors.from_name && <p id="footer-name-error" className="mt-1 text-xs text-red-400">{errors.from_name}</p>}
             </div>
@@ -249,7 +249,7 @@ export default function Footer() {
                 placeholder="Phone Number"
                 aria-invalid={Boolean(errors.phone)}
                 aria-describedby={errors.phone ? 'footer-phone-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.phone ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.phone ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
               />
               {errors.phone && <p id="footer-phone-error" className="mt-1 text-xs text-red-400">{errors.phone}</p>}
             </div>
@@ -263,7 +263,7 @@ export default function Footer() {
                 placeholder="Email Address"
                 aria-invalid={Boolean(errors.from_email)}
                 aria-describedby={errors.from_email ? 'footer-email-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.from_email ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.from_email ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
               />
               {errors.from_email && <p id="footer-email-error" className="mt-1 text-xs text-red-400">{errors.from_email}</p>}
             </div>
@@ -277,7 +277,7 @@ export default function Footer() {
                 placeholder="Service Address"
                 aria-invalid={Boolean(errors.address)}
                 aria-describedby={errors.address ? 'footer-address-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.address ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.address ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
               />
               {errors.address && <p id="footer-address-error" className="mt-1 text-xs text-red-400">{errors.address}</p>}
             </div>
@@ -289,7 +289,7 @@ export default function Footer() {
                 onChange={handleChange}
                 aria-invalid={Boolean(errors.service)}
                 aria-describedby={errors.service ? 'footer-service-error' : undefined}
-                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-gray-300 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.service ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-gray-300 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.service ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
               >
                 <option value="" disabled>Service Needed</option>
                 {quoteServiceOptions.map((service) => <option key={service} value={service}>{service}</option>)}
@@ -308,7 +308,7 @@ export default function Footer() {
                   required
                   aria-invalid={Boolean(errors.customService)}
                   aria-describedby={errors.customService ? 'footer-custom-service-error' : undefined}
-                  className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${errors.customService ? 'border-red-500' : 'border-gray-700 focus:border-sky-400'}`}
+                  className={`w-full rounded-lg border bg-gray-800 px-4 py-2.5 text-white placeholder-gray-500 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.customService ? 'border-red-500' : 'border-gray-700 focus:border-blue-400'}`}
                 />
                 {errors.customService && <p id="footer-custom-service-error" className="mt-1 text-xs text-red-400">{errors.customService}</p>}
               </div>
@@ -346,7 +346,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto flex flex-col items-center justify-between gap-4 pt-8 text-center text-xs text-gray-500 md:flex-row md:text-left">
         <p>&copy; {new Date().getFullYear()} A&N Gutters. All rights reserved.</p>
-        <span className="inline-flex items-center rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-2 text-sky-300 font-medium">
+        <span className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-400/10 px-4 py-2 text-blue-400 font-medium">
           ✓ Licensed & Insured in Western NY
         </span>
       </div>

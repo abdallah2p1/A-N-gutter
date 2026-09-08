@@ -106,7 +106,7 @@ export default function Contact() {
         {/* Contact Info */}
         <div className="flex flex-col justify-center">
           <a
-            href="tel:7164953652"
+            href="tel:+17164953652"
             className="inline-flex items-center gap-3 w-fit rounded-full bg-blue-400 px-5 py-3 text-lg font-bold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-200 mb-5"
           >
             <Phone className="h-5 w-5" />
@@ -140,7 +140,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-1">Email</h4>
-                <p className="text-slate-600">Info@anconstructionpros.com</p>
+                <a href="mailto:Info@anconstructionpros.com" className="text-slate-600 hover:text-blue-400">Info@anconstructionpros.com</a>
               </div>
             </div>
 
@@ -155,7 +155,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-2xl border border-slate-200 bg-gradient-to-r from-blue-50 to-sky-50 p-5 shadow-sm">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-gradient-to-r from-blue-50 to-blue-400 p-5 shadow-sm">
             <div className="flex items-center gap-2 text-blue-700 font-semibold mb-2">
               <ShieldCheck className="h-5 w-5" />
               Licensed & Insured
@@ -218,7 +218,7 @@ export default function Contact() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="john@example.com"
+                placeholder="your@email.com"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? 'email-error' : undefined}
                 className={`w-full px-5 py-3.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-700 transition-all text-slate-900 text-base ${errors.email ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}

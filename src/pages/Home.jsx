@@ -130,7 +130,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
             <Link 
               to="/contact" 
-              className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-royal-blue hover:bg-blue-600 text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-2xl shadow-blue-500/40"
+              className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-400 hover:bg-blue-600 text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-2xl shadow-blue-500/40"
             >
               Get a Quote <ArrowRight size={22} className="transition-transform group-hover:translate-x-1.5" />
             </Link>
@@ -168,7 +168,7 @@ export default function Home() {
       <section className="py-24 px-6 bg-bg-light relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-black text-royal-blue mb-4">Our Services</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-black text-blue-400 mb-4">Our Services</h2>
             <p className="text-xl text-gray-600">
               Expert solutions designed to effectively manage water flow and preserve your property's foundation.
             </p>
@@ -206,7 +206,7 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto z-10 relative mb-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-4">What We Offer</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-4">Why Choose Us</h2>
             <p className="text-xl text-blue-100/80">Unmatched quality, premium materials, and total peace of mind for every homeowner.</p>
           </div>
           
