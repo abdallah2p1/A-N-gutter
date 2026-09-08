@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Offers from './pages/Offers';
 import Contact from './pages/Contact';
+import LoadingScreen from './components/LoadingScreen';
 import './App.css';
 
 function ScrollToTop() {
@@ -43,8 +45,21 @@ function ScrollToTop() {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1800);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
+      <AnimatePresence>
+        {loading && <LoadingScreen key="loading" />}
+      </AnimatePresence>
       <Router>
         <ScrollToTop />
         <Routes>
