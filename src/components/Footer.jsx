@@ -136,7 +136,7 @@ export default function Footer() {
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400/10 text-blue-400 ring-1 ring-blue-400/30 transition-colors flex-shrink-0">
                 <MapPin size={18} />
               </div>
-              <span className="font-medium">Buffalo, Rochester & Surrounding areas</span>
+              <span className="font-medium">Buffalo, Rochester & Surrounding Areas</span>
             </div>
           </div>
         </ScrollReveal>
