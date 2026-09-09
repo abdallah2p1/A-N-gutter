@@ -158,8 +158,8 @@ export default function Home() {
         <ScrollReveal className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 text-center">
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Warranty</div>
-            <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Free, Onsite Estimates</div>
-            <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">5 Star Service</div>
+            <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Free Onsite Estimates</div>
+            <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">5 Star-Service</div>
             <div className="font-bold text-slate-900 text-lg md:text-xl w-full tracking-tight">Licensed & Insured</div>
           </div>
         </ScrollReveal>

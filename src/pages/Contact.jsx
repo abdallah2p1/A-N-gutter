@@ -142,7 +142,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-blue-700 transition-colors duration-300">Service Areas</h4>
-                <p className="text-slate-600">Buffalo & Rochester Surrounding Areas, Western NY</p>
+                <p className="text-slate-600">Buffalo, Rochester & Surrounding areas</p>
               </div>
             </div>
 
