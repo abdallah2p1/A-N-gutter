@@ -45,15 +45,20 @@ function ScrollToTop() {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    return !sessionStorage.getItem('hasVisitedApp');
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1800);
-    
-    return () => clearTimeout(timer);
-  }, []);
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        sessionStorage.setItem('hasVisitedApp', 'true');
+      }, 1800);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
 
   return (
     <>

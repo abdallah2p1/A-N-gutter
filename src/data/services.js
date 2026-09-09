@@ -1,6 +1,6 @@
 import commercialGutters from "../assets/commercial-gutters.jpg";
 import gutterCleaning from "../assets/gutter-cleaning.jpg";
-import gutterGuards from "../assets/gutter-guards.jpg";
+import gutterGuards from "../assets/gutter-guardsnew.jpg";
 import gutterRepair from "../assets/gutter-repairandmaintainance.jpg";
 import residentialGutters from "../assets/resdintal-gutters.jpg";
 import woodTrimRepair from "../assets/wood-trim-repair.jpg";

@@ -1,7 +1,7 @@
 import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logoImg from '../assets/Untitled design.png';
+import logoImg from '../assets/f2c1c379-c95d-4626-919d-88c4132c3b87 (2).webp';
 import { services } from '../data/services';
 
 export default function Header() {
@@ -55,7 +55,7 @@ export default function Header() {
             <img 
               src={logoImg} 
               alt="A&N Gutters Logo" 
-              className="h-10 md:h-12 w-auto object-contain" 
+              className="h-14 md:h-16 lg:h-18 w-auto object-contain" 
             />
           </Link>
           

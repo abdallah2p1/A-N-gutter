@@ -20,16 +20,22 @@ function ServiceCard({ image, title, description, backDescription, linkTo }) {
       className="group relative flex flex-col bg-transparent [perspective:1000px] cursor-pointer h-full"
       onClick={() => setIsFlipped(!isFlipped)}
     >
-      <div className={`relative w-full h-full rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-700 [transform-style:preserve-3d] border border-gray-100 ${isFlipped ? '[transform:rotateY(180deg)]' : 'hover:-translate-y-2'}`}>
+      {/* 
+        This is the flipping container. It is ALSO a CSS grid container.
+        Both Front and Back faces sit in the same cell (col-start-1 row-start-1) 
+        so the container automatically sizes to the tallest face.
+      */}
+      <div className={`grid grid-cols-1 grid-rows-1 relative w-full h-full rounded-[2rem] shadow-sm hover:shadow-2xl transition-transform duration-700 [transform-style:preserve-3d] border border-gray-100 ${isFlipped ? '[transform:rotateY(180deg)]' : 'hover:-translate-y-2'}`}>
         
         {/* Front */}
-        <div className="relative w-full h-full [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden">
-          <div className="w-full h-60 overflow-hidden relative shrink-0">
+        <div className="col-start-1 row-start-1 relative w-full h-full [backface-visibility:hidden] flex flex-col bg-white rounded-[2rem] overflow-hidden">
+          <div className="w-full h-60 overflow-hidden relative shrink-0 bg-slate-100">
             <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
             <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
           </div>
           
-          <div className="absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-blue-400 shadow-xl flex items-center justify-center text-white group-hover:bg-blue-700 group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-500 z-10 border border-transparent">
+          {/* The floating arrow - fade it out when flipped to prevent Safari 3D bleeding bug */}
+          <div className={`absolute right-8 top-60 -translate-y-1/2 w-14 h-14 rounded-2xl bg-blue-400 shadow-xl flex items-center justify-center text-white group-hover:bg-blue-700 group-hover:-translate-y-2 group-hover:rotate-[-10deg] transition-all duration-300 border border-transparent z-10 ${isFlipped ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
              <ArrowRight size={24} className="transform group-hover:scale-110 transition-transform" />
           </div>
 
@@ -46,7 +52,7 @@ function ServiceCard({ image, title, description, backDescription, linkTo }) {
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-gradient-to-br from-blue-400 to-blue-900 text-white rounded-[2rem] p-8 shadow-2xl">
+        <div className="col-start-1 row-start-1 relative w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col bg-gradient-to-br from-blue-400 to-blue-900 text-white rounded-[2rem] p-8 shadow-2xl">
           <h3 className="text-2xl font-bold mb-4 border-b border-white/20 pb-4">{title}</h3>
           <p className="text-blue-50 flex-grow leading-relaxed text-sm">
             {backDescription || description}
